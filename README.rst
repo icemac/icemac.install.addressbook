@@ -5,7 +5,7 @@ icemac.update.addressbook
 Scripts to update the installation of `icemac.addressbook`_  to a new version
 of the package.
 
-.. _`icemac.addressbook` : http://pypi.python.org/pypi/icemac.addressbook
+.. _`icemac.addressbook` : https://pypi.org/project/icemac.addressbook/
 
 .. contents::
 
