@@ -96,7 +96,9 @@ The script executes the following steps:
 
 
 
-.. TODO
+TODO
+====
 
 * Prerequisites_ (s. above)
 * Trove classifiers
+* get rid of `mock` again?
