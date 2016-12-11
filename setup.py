@@ -11,7 +11,9 @@ setup(
     ],
 
     extras_require={
-        'test': [],
+        'test': [
+            'mock',
+        ],
     },
 
     entry_points={

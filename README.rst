@@ -26,6 +26,12 @@ FOR A PARTICULAR PURPOSE.
 Prerequisites
 =============
 
+The following software needs to be installed to use the scripts provided by
+this package:
+
+* ``tar`` with bzip2 support
+
+
 .. XXX sure about this?
 
 
