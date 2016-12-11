@@ -17,3 +17,4 @@ develop-eggs
 eggs
 parts
 test-report/
+htmlcov/
