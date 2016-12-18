@@ -35,8 +35,8 @@ def test_archive__archive__1():
 def test_archive__archive__2(address_book):
     """It creates the archive directory if it does not exist."""
     archive('24.11')
-    assert (['archive', 'icemac.addressbook-24.11'] ==
-            [x.basename for x in address_book.listdir()])
+    assert (set(['archive', 'icemac.addressbook-24.11']) ==
+            set(x.basename for x in address_book.listdir()))
 
 
 def test_archive__archive__3(address_book, archive_dir):
