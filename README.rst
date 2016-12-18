@@ -100,4 +100,3 @@ TODO
 ====
 
 * Prerequisites_ (s. above)
-* Trove classifiers
