@@ -1,6 +1,7 @@
 from .cmd import call_cmd
 import argparse
 import os.path
+import shutil
 
 ARCHIVE_DIR_NAME = 'archive'
 
@@ -16,6 +17,7 @@ def archive(version):
         archive_dir=ARCHIVE_DIR_NAME, dirname=dirname)
     call_cmd('tar -cjf {target} {dirname}'.format(
         target=target_archive, dirname=dirname))
+    shutil.rmtree(dirname)
     return "{dirname} archived to {target}".format(
         dirname=dirname, target=target_archive)
 
