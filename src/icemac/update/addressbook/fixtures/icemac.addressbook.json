@@ -1,0 +1,878 @@
+{
+    "info": {
+        "maintainer": "",
+        "docs_url": null,
+        "requires_python": "",
+        "maintainer_email": "",
+        "cheesecake_code_kwalitee_id": null,
+        "keywords": "python address book addressbook zope3 zope application web phone number e-mail email home page homepage wsgi",
+        "package_url": "http://pypi.python.org/pypi/icemac.addressbook",
+        "author": "Michael Howitz",
+        "author_email": "icemac@gmx.net",
+        "download_url": "http://pypi.python.org/pypi/icemac.addressbook",
+        "platform": "UNKNOWN",
+        "version": "2.8",
+        "cheesecake_documentation_id": null,
+        "_pypi_hidden": false,
+        "description": "==================\nicemac.addressbook\n==================\n\nPurpose:\n    Store, search and export addresses and phone numbers using a web application.\nStatus:\n    stable version, used in production; some features will be added in future\n\nCopyright (c) 2008-2016 Michael Howitz\n\nAll Rights Reserved.\n\nThis software is subject to the provisions of the Zope Public License,\nVersion 2.1 (ZPL).  A copy of the ZPL should accompany this distribution.\nTHIS SOFTWARE IS PROVIDED \"AS IS\" AND ANY AND ALL EXPRESS OR IMPLIED\nWARRANTIES ARE DISCLAIMED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF TITLE, MERCHANTABILITY, AGAINST INFRINGEMENT, AND FITNESS\nFOR A PARTICULAR PURPOSE.\n\n* Features_\n* Screenshots_\n* Download_\n* Installation_\n* Update_\n* `Run the tests`_\n* `Run the application`_\n* `User management`_\n* `To do`_\n\n.. _Features : https://bitbucket.org/icemac/icemac.addressbook/wiki/Features\n.. _Screenshots : https://bitbucket.org/icemac/icemac.addressbook/wiki/Screenshots\n.. _Download : https://pypi.python.org/pypi/icemac.addressbook#download\n.. _Installation : https://bitbucket.org/icemac/icemac.addressbook/wiki/Installation\n.. _`User management` : https://bitbucket.org/icemac/icemac.addressbook/wiki/User%20management\n.. _`Update` : https://bitbucket.org/icemac/icemac.addressbook/wiki/Update\n.. _`Run the tests`: https://bitbucket.org/icemac/icemac.addressbook/wiki/Run_the_tests\n.. _`Run the application` : https://bitbucket.org/icemac/icemac.addressbook/wiki/Run_the_application\n.. _`To do` : https://bitbucket.org/icemac/icemac.addressbook/wiki/To%20do\n\n\n=======\nHacking\n=======\n\nFork me on: https://bitbucket.org/icemac/icemac.addressbook\n\nSee `Source installation`_, too.\n\n.. _`Source installation` : https://bitbucket.org/icemac/icemac.addressbook/wiki/Source%20installation\n\n\n==========\nChange log\n==========\n\n\n2.8 (2016-08-28)\n================\n\nFeatures\n--------\n\n- Store timestamp of last log-in and render it in the principals list.\n\n2.7.1 (2016-06-26)\n==================\n\n- Update to an `icemac.ab.locales` version which has complete translations\n  for all address book and calendar features.\n\n\n2.7 (2016-06-25)\n================\n\nFeatures\n--------\n\n- Render field descriptions (resp. notes of user defined fields) as hint text\n  below the widget in the form.\n\n- Allow to select a default time zone in the address book's edit form. It is\n  used for all users who do not have set their own time zone in the\n  preferences.\n\n- Whitespace gets stripped from both ends of entered text values. Excluded are\n  only the text fields in the `update` search result handler.\n\nOther\n-----\n\n- Update most libraries needed for the address book to their newest versions.\n\n- Get rid of dependency on ``classproperty``.\n\n2.6.4 (2016-04-16)\n==================\n\n- Enable versioning in `fanstatic` so the no force-reload is needed to get the\n  new CSS file versions.\n\n2.6.3 (2016-04-16)\n==================\n\n- Allow to run `icemac.ab.calendar` 1.8 with this address book version.\n\n\n2.6.2 (2016-03-12)\n==================\n\n- Render more form error messages in red.\n\n\n2.6.1 (2016-03-08)\n==================\n\n- Fix backup and restore scripts which where broken due to updating to ZODB\n  4.x.\n\n\n2.6 (2016-03-05)\n================\n\nFeatures\n--------\n\n- Add javascript date picker to date fields.\n\n- iCal export of birth dates now includes birth year, too.\n\n- Add new `time` data type for user defined fields.\n\n- Render time picker for `time` fields.\n\nFixes\n-----\n\n- Store ``datetime`` values in UTC.\n\nOther\n-----\n\n- Update most libraries needed for address book to newest versions.\n\n- No longer depend on ZTK but build up our own list.\n\n- Lint JavaScript files.\n\n- Rewrite tests to use py.test.\n\n- Update Selenium tests to Webdriver.\n\n- Move some functionality only needed in `icemac.ab.importer` there.\n\n- Drop `.utils.site()` in favour of `zope.component.hooks.site()`.\n\n\nPrevious Versions\n=================\n\nSee `OLD_CHANGES.rst`_.\n\n.. _`OLD_CHANGES.rst` : https://bitbucket.org/icemac/icemac.addressbook/src/tip/OLD_CHANGES.rst\n\n==========\n Download\n==========",
+        "release_url": "http://pypi.python.org/pypi/icemac.addressbook/2.8",
+        "downloads": {
+            "last_month": 7,
+            "last_week": 0,
+            "last_day": 0
+        },
+        "_pypi_ordering": 53,
+        "classifiers": [
+            "Development Status :: 5 - Production/Stable",
+            "Environment :: Web Environment",
+            "Framework :: Paste",
+            "Framework :: Zope3",
+            "Intended Audience :: End Users/Desktop",
+            "Intended Audience :: Information Technology",
+            "Intended Audience :: Other Audience",
+            "Intended Audience :: Religion",
+            "Intended Audience :: Telecommunications Industry",
+            "License :: OSI Approved",
+            "License :: OSI Approved :: Zope Public License",
+            "Natural Language :: English",
+            "Natural Language :: German",
+            "Operating System :: OS Independent",
+            "Programming Language :: Python",
+            "Programming Language :: Python :: 2",
+            "Programming Language :: Python :: 2.7",
+            "Programming Language :: Python :: 2 :: Only",
+            "Programming Language :: Python :: Implementation",
+            "Programming Language :: Python :: Implementation :: CPython",
+            "Topic :: Communications",
+            "Topic :: Communications :: Email",
+            "Topic :: Communications :: Email :: Address Book",
+            "Topic :: Communications :: Telephony",
+            "Topic :: Internet",
+            "Topic :: Internet :: WWW/HTTP",
+            "Topic :: Internet :: WWW/HTTP :: WSGI",
+            "Topic :: Internet :: WWW/HTTP :: WSGI :: Application",
+            "Topic :: Office/Business",
+            "Topic :: Office/Business :: Groupware",
+            "Topic :: Religion"
+        ],
+        "name": "icemac.addressbook",
+        "bugtrack_url": null,
+        "license": "ZPL 2.1",
+        "summary": "Multi user address book application",
+        "home_page": "https://bitbucket.org/icemac/icemac.addressbook",
+        "cheesecake_installability_id": null
+    },
+    "releases": {
+        "1.1.1": [
+            {
+                "has_sig": false,
+                "upload_time": "2010-01-25T22:23:53",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/d5/43/5cbd40558f45bd68e8d03665198d171d9bf85fc607c8c19d79e35658f75e/icemac.addressbook-1.1.1.tar.gz",
+                "md5_digest": "28099b05a3759686da9110f5939205fe",
+                "downloads": 3448,
+                "filename": "icemac.addressbook-1.1.1.tar.gz",
+                "packagetype": "no-sdist",
+                "path": "d5/43/5cbd40558f45bd68e8d03665198d171d9bf85fc607c8c19d79e35658f75e/icemac.addressbook-1.1.1.tar.gz",
+                "size": 112738
+            }
+        ],
+        "1.1.0": [
+            {
+                "has_sig": false,
+                "upload_time": "2010-01-25T22:12:08",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/6e/4c/7ceb8e5fe476b0134bbe4e0ed2165af52a6aa883a696b2d371b9b313bc75/icemac.addressbook-1.1.0.tar.gz",
+                "md5_digest": "327abc1b01ed9b004685a3f5e997806b",
+                "downloads": 2998,
+                "filename": "icemac.addressbook-1.1.0.tar.gz",
+                "packagetype": "sdist",
+                "path": "6e/4c/7ceb8e5fe476b0134bbe4e0ed2165af52a6aa883a696b2d371b9b313bc75/icemac.addressbook-1.1.0.tar.gz",
+                "size": 112729
+            }
+        ],
+        "2.6.2": [
+            {
+                "has_sig": false,
+                "upload_time": "2016-03-12T13:20:57",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/16/28/6524d23dcdf5f40579b0bd81bb3ccfb5375a4093990b8a1d3780288442c6/icemac.addressbook-2.6.2.tar.gz",
+                "md5_digest": "6fa0040b28ec9776d3ca0054329e2970",
+                "downloads": 110,
+                "filename": "icemac.addressbook-2.6.2.tar.gz",
+                "packagetype": "sdist",
+                "path": "16/28/6524d23dcdf5f40579b0bd81bb3ccfb5375a4093990b8a1d3780288442c6/icemac.addressbook-2.6.2.tar.gz",
+                "size": 303260
+            }
+        ],
+        "1.0.0": [
+            {
+                "has_sig": false,
+                "upload_time": "2009-12-29T16:41:55",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/c8/68/60f3c539da1cf6839874d6ddbdaff7f3cf040ee2f977ee535dbbcc6daf18/icemac.addressbook-1.0.0.tar.gz",
+                "md5_digest": "66613f052445deb379b08a94a26195ff",
+                "downloads": 3006,
+                "filename": "icemac.addressbook-1.0.0.tar.gz",
+                "packagetype": "sdist",
+                "path": "c8/68/60f3c539da1cf6839874d6ddbdaff7f3cf040ee2f977ee535dbbcc6daf18/icemac.addressbook-1.0.0.tar.gz",
+                "size": 105934
+            }
+        ],
+        "1.0.1": [
+            {
+                "has_sig": false,
+                "upload_time": "2010-01-13T21:38:16",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/a7/bf/0316d181666be95b667b906b813991f37f49bbfb9673ef661b827c107b85/icemac.addressbook-1.0.1.tar.gz",
+                "md5_digest": "9481f90ca726467599e58290ee537ac0",
+                "downloads": 3042,
+                "filename": "icemac.addressbook-1.0.1.tar.gz",
+                "packagetype": "sdist",
+                "path": "a7/bf/0316d181666be95b667b906b813991f37f49bbfb9673ef661b827c107b85/icemac.addressbook-1.0.1.tar.gz",
+                "size": 106461
+            }
+        ],
+        "2.0.1": [
+            {
+                "has_sig": false,
+                "upload_time": "2013-12-08T20:26:35",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/d2/14/54b7682fb1da84331d96d2d039c921da1dbe06eb229cafe075fb76ac9483/icemac.addressbook-2.0.1.zip",
+                "md5_digest": "18e9061bae6736e166ad616f07c72e92",
+                "downloads": 1955,
+                "filename": "icemac.addressbook-2.0.1.zip",
+                "packagetype": "sdist",
+                "path": "d2/14/54b7682fb1da84331d96d2d039c921da1dbe06eb229cafe075fb76ac9483/icemac.addressbook-2.0.1.zip",
+                "size": 439448
+            }
+        ],
+        "2.0.0": [
+            {
+                "has_sig": false,
+                "upload_time": "2013-11-09T09:33:16",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/bc/b2/e1a89155e6f94b2c3ef72cfc4ed612de7e3374d8296bba530ff693d9e202/icemac.addressbook-2.0.0.zip",
+                "md5_digest": "41f287a6751f7db1fae5457b009ff30b",
+                "downloads": 1941,
+                "filename": "icemac.addressbook-2.0.0.zip",
+                "packagetype": "sdist",
+                "path": "bc/b2/e1a89155e6f94b2c3ef72cfc4ed612de7e3374d8296bba530ff693d9e202/icemac.addressbook-2.0.0.zip",
+                "size": 439167
+            }
+        ],
+        "0.1": [],
+        "0.3": [
+            {
+                "has_sig": false,
+                "upload_time": "2009-03-31T21:31:02",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/e2/d7/80bff503be03e2384a9a01eaf86b18f1b4cfa50793c721f01a7803970d6e/icemac.addressbook-0.3.tar.gz",
+                "md5_digest": "63bedc60b6bf6a34cc0e0087a40bbbd8",
+                "downloads": 3032,
+                "filename": "icemac.addressbook-0.3.tar.gz",
+                "packagetype": "sdist",
+                "path": "e2/d7/80bff503be03e2384a9a01eaf86b18f1b4cfa50793c721f01a7803970d6e/icemac.addressbook-0.3.tar.gz",
+                "size": 447512
+            }
+        ],
+        "0.2": [
+            {
+                "has_sig": false,
+                "upload_time": "2009-01-02T19:48:59",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/98/be/2059b02ac9164d824190f0884c366e020ca0ddd2be9782b0fd4f345318fc/icemac.addressbook-0.2.tar.gz",
+                "md5_digest": "3e1f5db7579926e7f79f66fcf52ed23f",
+                "downloads": 3087,
+                "filename": "icemac.addressbook-0.2.tar.gz",
+                "packagetype": "sdist",
+                "path": "98/be/2059b02ac9164d824190f0884c366e020ca0ddd2be9782b0fd4f345318fc/icemac.addressbook-0.2.tar.gz",
+                "size": 429247
+            }
+        ],
+        "0.5": [
+            {
+                "has_sig": false,
+                "upload_time": "2009-11-21T16:31:31",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/b4/90/d78ea3ea8eecf9d7b9c96b4e11f9ea2e130f79c8f14997ebe6dd094adb84/icemac.addressbook-0.5.tar.gz",
+                "md5_digest": "b08a28a60347278247dc9363b4190011",
+                "downloads": 3012,
+                "filename": "icemac.addressbook-0.5.tar.gz",
+                "packagetype": "sdist",
+                "path": "b4/90/d78ea3ea8eecf9d7b9c96b4e11f9ea2e130f79c8f14997ebe6dd094adb84/icemac.addressbook-0.5.tar.gz",
+                "size": 102682
+            }
+        ],
+        "0.4": [
+            {
+                "has_sig": false,
+                "upload_time": "2009-05-15T17:51:50",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/5c/ad/069f2b6b93c2b41f04f2fec847ff51095b1be4fa0c06d83a887a24c15fe9/icemac.addressbook-0.4.tar.gz",
+                "md5_digest": "4a8ef706c92f500551191b3ef36ef10d",
+                "downloads": 3142,
+                "filename": "icemac.addressbook-0.4.tar.gz",
+                "packagetype": "sdist",
+                "path": "5c/ad/069f2b6b93c2b41f04f2fec847ff51095b1be4fa0c06d83a887a24c15fe9/icemac.addressbook-0.4.tar.gz",
+                "size": 466106
+            }
+        ],
+        "2.6.4": [
+            {
+                "has_sig": false,
+                "upload_time": "2016-04-16T11:56:01",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/ef/6c/3eab60155c1878ee9af5a6a03eca74f5da61712adf892a47d03421e62f09/icemac.addressbook-2.6.4.tar.gz",
+                "md5_digest": "60d75e641f5126a668cb07b2ba231576",
+                "downloads": 113,
+                "filename": "icemac.addressbook-2.6.4.tar.gz",
+                "packagetype": "sdist",
+                "path": "ef/6c/3eab60155c1878ee9af5a6a03eca74f5da61712adf892a47d03421e62f09/icemac.addressbook-2.6.4.tar.gz",
+                "size": 303471
+            }
+        ],
+        "2.8": [
+            {
+                "has_sig": false,
+                "upload_time": "2016-08-28T14:23:29",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/f9/e6/3b40e95936e32fa3d46cc5807785217c6444c086e669ccffffe0a2dff6ee/icemac.addressbook-2.8.tar.gz",
+                "md5_digest": "36057f84c37c93d125eb654ae66a49ae",
+                "downloads": 320,
+                "filename": "icemac.addressbook-2.8.tar.gz",
+                "packagetype": "sdist",
+                "path": "f9/e6/3b40e95936e32fa3d46cc5807785217c6444c086e669ccffffe0a2dff6ee/icemac.addressbook-2.8.tar.gz",
+                "size": 276749
+            }
+        ],
+        "2.2.0": [
+            {
+                "has_sig": false,
+                "upload_time": "2014-01-02T19:03:43",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/56/f9/d4a056d71332afae9ef3f4c87de5758fae695219d91a2e09660ea91f7fff/icemac.addressbook-2.2.0.zip",
+                "md5_digest": "bbcaa2525325c729cd098011eb256568",
+                "downloads": 1929,
+                "filename": "icemac.addressbook-2.2.0.zip",
+                "packagetype": "sdist",
+                "path": "56/f9/d4a056d71332afae9ef3f4c87de5758fae695219d91a2e09660ea91f7fff/icemac.addressbook-2.2.0.zip",
+                "size": 440789
+            }
+        ],
+        "0.1.1": [
+            {
+                "has_sig": false,
+                "upload_time": "2008-11-10T20:24:16",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/a9/94/68eae68a0418be1f86f1051d71b59bff8b829cdd88ed0f43293382d832d7/icemac.addressbook-0.1.1.tar.gz",
+                "md5_digest": "c1afd47f8ffc8e89223c2075362e801b",
+                "downloads": 3098,
+                "filename": "icemac.addressbook-0.1.1.tar.gz",
+                "packagetype": "sdist",
+                "path": "a9/94/68eae68a0418be1f86f1051d71b59bff8b829cdd88ed0f43293382d832d7/icemac.addressbook-0.1.1.tar.gz",
+                "size": 389602
+            }
+        ],
+        "2.1.0": [
+            {
+                "has_sig": false,
+                "upload_time": "2013-12-31T13:45:33",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/5a/e5/a51d375a843e4f98f6b72ad997cd2894226145c06b1ebdecce6c397f8649/icemac.addressbook-2.1.0.zip",
+                "md5_digest": "840f083ee95780231636d6a62547935a",
+                "downloads": 1907,
+                "filename": "icemac.addressbook-2.1.0.zip",
+                "packagetype": "sdist",
+                "path": "5a/e5/a51d375a843e4f98f6b72ad997cd2894226145c06b1ebdecce6c397f8649/icemac.addressbook-2.1.0.zip",
+                "size": 441839
+            }
+        ],
+        "2.7": [
+            {
+                "has_sig": false,
+                "upload_time": "2016-06-25T08:52:48",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/21/25/3004ed0b2244a8e9b89678300ad47d79772813d7d7b7ca635d32b5cf7fc7/icemac.addressbook-2.7.tar.gz",
+                "md5_digest": "65d25d39e5e4cbc563a93edec648accf",
+                "downloads": 106,
+                "filename": "icemac.addressbook-2.7.tar.gz",
+                "packagetype": "sdist",
+                "path": "21/25/3004ed0b2244a8e9b89678300ad47d79772813d7d7b7ca635d32b5cf7fc7/icemac.addressbook-2.7.tar.gz",
+                "size": 276405
+            }
+        ],
+        "2.6": [
+            {
+                "has_sig": false,
+                "upload_time": "2016-03-05T12:24:47",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/66/37/1f0a4574d6c9b2a95b4f694c5c0ee8e6ebd07b92d30d7dc0e90a1a7bef46/icemac.addressbook-2.6.tar.gz",
+                "md5_digest": "36e289855ee0b222aa63ad571b4cbf21",
+                "downloads": 108,
+                "filename": "icemac.addressbook-2.6.tar.gz",
+                "packagetype": "sdist",
+                "path": "66/37/1f0a4574d6c9b2a95b4f694c5c0ee8e6ebd07b92d30d7dc0e90a1a7bef46/icemac.addressbook-2.6.tar.gz",
+                "size": 302526
+            }
+        ],
+        "0.1.2": [
+            {
+                "has_sig": false,
+                "upload_time": "2008-11-23T16:35:54",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/97/2d/26d46091382db9e5762f98e2e4b92ced578f6bdcc9ec79d9c1a25ded3c07/icemac.addressbook-0.1.2.tar.gz",
+                "md5_digest": "4a885075975e5618840dd14e747aac9c",
+                "downloads": 3080,
+                "filename": "icemac.addressbook-0.1.2.tar.gz",
+                "packagetype": "sdist",
+                "path": "97/2d/26d46091382db9e5762f98e2e4b92ced578f6bdcc9ec79d9c1a25ded3c07/icemac.addressbook-0.1.2.tar.gz",
+                "size": 389818
+            }
+        ],
+        "0.3.2": [
+            {
+                "has_sig": false,
+                "upload_time": "2009-04-03T18:29:34",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/02/40/b35f2e80993d87c41d5e6aac4b4f031a913d2558008118d4b540da73ca22/icemac.addressbook-0.3.2.tar.gz",
+                "md5_digest": "06980670e50b80ff31bba361e1ff5217",
+                "downloads": 3058,
+                "filename": "icemac.addressbook-0.3.2.tar.gz",
+                "packagetype": "sdist",
+                "path": "02/40/b35f2e80993d87c41d5e6aac4b4f031a913d2558008118d4b540da73ca22/icemac.addressbook-0.3.2.tar.gz",
+                "size": 447461
+            }
+        ],
+        "0.3.3": [
+            {
+                "has_sig": false,
+                "upload_time": "2009-04-05T20:25:22",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/aa/a7/a19f353808f50ceecfe4be9acfa681f8cf2bcbe7ee6636b4706e34a48068/icemac.addressbook-0.3.3.tar.gz",
+                "md5_digest": "89fda5d3105ab1367346e1b40133f579",
+                "downloads": 3049,
+                "filename": "icemac.addressbook-0.3.3.tar.gz",
+                "packagetype": "sdist",
+                "path": "aa/a7/a19f353808f50ceecfe4be9acfa681f8cf2bcbe7ee6636b4706e34a48068/icemac.addressbook-0.3.3.tar.gz",
+                "size": 447792
+            }
+        ],
+        "0.3.1": [
+            {
+                "has_sig": false,
+                "upload_time": "2009-03-31T21:54:55",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/d1/0a/d977a154ecdeaa663c289daee2f4feb9b9ae1e2a081e0bdafbe666a5fc20/icemac.addressbook-0.3.1.tar.gz",
+                "md5_digest": "231ee100373f1d7c471a9153500560a2",
+                "downloads": 3058,
+                "filename": "icemac.addressbook-0.3.1.tar.gz",
+                "packagetype": "sdist",
+                "path": "d1/0a/d977a154ecdeaa663c289daee2f4feb9b9ae1e2a081e0bdafbe666a5fc20/icemac.addressbook-0.3.1.tar.gz",
+                "size": 447573
+            }
+        ],
+        "1.10.3": [
+            {
+                "has_sig": false,
+                "upload_time": "2013-07-30T12:28:27",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/3f/d2/b11fdbedf303c8c21f7edce52df121a30a6aaca4ed44e2c5233a8f8a7fba/icemac.addressbook-1.10.3.zip",
+                "md5_digest": "d818143c6fe4d5a9183fd2f89d83478f",
+                "downloads": 2108,
+                "filename": "icemac.addressbook-1.10.3.zip",
+                "packagetype": "sdist",
+                "path": "3f/d2/b11fdbedf303c8c21f7edce52df121a30a6aaca4ed44e2c5233a8f8a7fba/icemac.addressbook-1.10.3.zip",
+                "size": 185116
+            }
+        ],
+        "1.6.0": [
+            {
+                "has_sig": false,
+                "upload_time": "2011-02-03T22:07:45",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/9f/e8/cc4d788398865518f1ba57b0f938fc328bb9132b0d459447328eede4cc76/icemac.addressbook-1.6.0.tar.gz",
+                "md5_digest": "38058a8ba9c8b89c23799e5dcdc4df3b",
+                "downloads": 2970,
+                "filename": "icemac.addressbook-1.6.0.tar.gz",
+                "packagetype": "sdist",
+                "path": "9f/e8/cc4d788398865518f1ba57b0f938fc328bb9132b0d459447328eede4cc76/icemac.addressbook-1.6.0.tar.gz",
+                "size": 210911
+            }
+        ],
+        "0.5.1": [
+            {
+                "has_sig": false,
+                "upload_time": "2009-11-21T16:52:44",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/22/d6/9f3d3f4f13d2ae220479d6481494a603ac25fe9586c82af217082b874f62/icemac.addressbook-0.5.1.tar.gz",
+                "md5_digest": "042b85ef3b8a068634abedcf2a986f3b",
+                "downloads": 3017,
+                "filename": "icemac.addressbook-0.5.1.tar.gz",
+                "packagetype": "sdist",
+                "path": "22/d6/9f3d3f4f13d2ae220479d6481494a603ac25fe9586c82af217082b874f62/icemac.addressbook-0.5.1.tar.gz",
+                "size": 102896
+            }
+        ],
+        "0.5.4": [
+            {
+                "has_sig": false,
+                "upload_time": "2009-12-20T17:56:49",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/3f/40/695af70b170a54c4602fdd63d9e66ff09f8f822c5f79b1fb453c2d779b73/icemac.addressbook-0.5.4.tar.gz",
+                "md5_digest": "c693dca7b2d3b5423f866376ac77bb7a",
+                "downloads": 3020,
+                "filename": "icemac.addressbook-0.5.4.tar.gz",
+                "packagetype": "sdist",
+                "path": "3f/40/695af70b170a54c4602fdd63d9e66ff09f8f822c5f79b1fb453c2d779b73/icemac.addressbook-0.5.4.tar.gz",
+                "size": 104702
+            }
+        ],
+        "1.9.0": [
+            {
+                "has_sig": false,
+                "upload_time": "2012-12-29T08:52:26",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/70/84/c830164b5f4710117aa4148aa0c5778186f6f72223b7a72ba7796e53503c/icemac.addressbook-1.9.0.zip",
+                "md5_digest": "623e1dc7458cfcdba1ca8de61fd8ee15",
+                "downloads": 2495,
+                "filename": "icemac.addressbook-1.9.0.zip",
+                "packagetype": "sdist",
+                "path": "70/84/c830164b5f4710117aa4148aa0c5778186f6f72223b7a72ba7796e53503c/icemac.addressbook-1.9.0.zip",
+                "size": 395666
+            }
+        ],
+        "1.8.0": [
+            {
+                "has_sig": false,
+                "upload_time": "2011-12-14T20:52:00",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/54/a5/4d6f27fa2031be09cb0419e39451fb96dd7b923c42af9e208a0e6190f444/icemac.addressbook-1.8.0.tar.gz",
+                "md5_digest": "8f2cc7d0eae19a8c9d21d18455feb275",
+                "downloads": 2821,
+                "filename": "icemac.addressbook-1.8.0.tar.gz",
+                "packagetype": "sdist",
+                "path": "54/a5/4d6f27fa2031be09cb0419e39451fb96dd7b923c42af9e208a0e6190f444/icemac.addressbook-1.8.0.tar.gz",
+                "size": 262438
+            }
+        ],
+        "1.8.1": [
+            {
+                "has_sig": false,
+                "upload_time": "2012-04-20T22:32:47",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/cf/6b/aed5cb86d1d5e68878b4f98683612a35d998d84bd1f34980fa836465febb/icemac.addressbook-1.8.1.tar.gz",
+                "md5_digest": "259c8d3a5feb38f5e9b9a843199c8472",
+                "downloads": 2776,
+                "filename": "icemac.addressbook-1.8.1.tar.gz",
+                "packagetype": "sdist",
+                "path": "cf/6b/aed5cb86d1d5e68878b4f98683612a35d998d84bd1f34980fa836465febb/icemac.addressbook-1.8.1.tar.gz",
+                "size": 265238
+            }
+        ],
+        "0.5.2": [
+            {
+                "has_sig": false,
+                "upload_time": "2009-11-21T19:37:14",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/a1/00/949ba4084c8e7da9b561b04228e3ee30029c3345c05027ba1e1fabb9ede6/icemac.addressbook-0.5.2.tar.gz",
+                "md5_digest": "2a1e20be6d9450ddac514f05c1e5605b",
+                "downloads": 3025,
+                "filename": "icemac.addressbook-0.5.2.tar.gz",
+                "packagetype": "sdist",
+                "path": "a1/00/949ba4084c8e7da9b561b04228e3ee30029c3345c05027ba1e1fabb9ede6/icemac.addressbook-0.5.2.tar.gz",
+                "size": 103875
+            }
+        ],
+        "1.7.0": [
+            {
+                "has_sig": false,
+                "upload_time": "2011-11-03T21:44:10",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/ef/b3/4269660203b24fd7e25f220d19577f82b700fca31221118d60e528abe4b0/icemac.addressbook-1.7.0.tar.gz",
+                "md5_digest": "da0bdc6723f5a55c4751bcb33c49b936",
+                "downloads": 2847,
+                "filename": "icemac.addressbook-1.7.0.tar.gz",
+                "packagetype": "sdist",
+                "path": "ef/b3/4269660203b24fd7e25f220d19577f82b700fca31221118d60e528abe4b0/icemac.addressbook-1.7.0.tar.gz",
+                "size": 259445
+            }
+        ],
+        "1.4.0": [
+            {
+                "has_sig": false,
+                "upload_time": "2010-08-19T18:28:43",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/14/d8/52d942857d478712a6cbfad2a16cd26cadd5a5dcff1beff2d95a5d020703/icemac.addressbook-1.4.0.tar.gz",
+                "md5_digest": "4cce7e43a5e6c05475ef889d47da1cc0",
+                "downloads": 2962,
+                "filename": "icemac.addressbook-1.4.0.tar.gz",
+                "packagetype": "sdist",
+                "path": "14/d8/52d942857d478712a6cbfad2a16cd26cadd5a5dcff1beff2d95a5d020703/icemac.addressbook-1.4.0.tar.gz",
+                "size": 126042
+            }
+        ],
+        "2.3.0": [
+            {
+                "has_sig": false,
+                "upload_time": "2014-02-08T19:58:20",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/ce/c6/6e9aabc10a4bfd4b8fef75b5ab7bb6babca5bebf544e7b82ec8b255ad80a/icemac.addressbook-2.3.0.zip",
+                "md5_digest": "a5dc6b34732ff0ea7755ffe75cc0f366",
+                "downloads": 1914,
+                "filename": "icemac.addressbook-2.3.0.zip",
+                "packagetype": "sdist",
+                "path": "ce/c6/6e9aabc10a4bfd4b8fef75b5ab7bb6babca5bebf544e7b82ec8b255ad80a/icemac.addressbook-2.3.0.zip",
+                "size": 441023
+            }
+        ],
+        "1.5.0": [
+            {
+                "has_sig": false,
+                "upload_time": "2010-11-23T18:45:46",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/b7/20/3895dd7bd7c06a84d5f63dc64497e0ad946d12f4a354e28b36a9c4616360/icemac.addressbook-1.5.0.tar.gz",
+                "md5_digest": "0eab109e6311be6a59362225c1557daf",
+                "downloads": 2954,
+                "filename": "icemac.addressbook-1.5.0.tar.gz",
+                "packagetype": "sdist",
+                "path": "b7/20/3895dd7bd7c06a84d5f63dc64497e0ad946d12f4a354e28b36a9c4616360/icemac.addressbook-1.5.0.tar.gz",
+                "size": 208194
+            }
+        ],
+        "1.3.0": [
+            {
+                "has_sig": false,
+                "upload_time": "2010-03-20T14:55:12",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/5c/7e/e68f133242d4cb291f1b9f6e70518131abb1897f779c95046774cd6b51ff/icemac.addressbook-1.3.0.tar.gz",
+                "md5_digest": "ad9e115d8fbe4c20c0af74d95365eaf9",
+                "downloads": 3064,
+                "filename": "icemac.addressbook-1.3.0.tar.gz",
+                "packagetype": "sdist",
+                "path": "5c/7e/e68f133242d4cb291f1b9f6e70518131abb1897f779c95046774cd6b51ff/icemac.addressbook-1.3.0.tar.gz",
+                "size": 115928
+            }
+        ],
+        "1.2.0": [
+            {
+                "has_sig": false,
+                "upload_time": "2010-02-06T16:40:50",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/7d/2e/35f71841c8fc4ca7dfae9f41603c6be4b3b0e716e5f3fe4677717c67ef4f/icemac.addressbook-1.2.0.tar.gz",
+                "md5_digest": "44b15a90dbafa93517d3642bd8ae962e",
+                "downloads": 3020,
+                "filename": "icemac.addressbook-1.2.0.tar.gz",
+                "packagetype": "sdist",
+                "path": "7d/2e/35f71841c8fc4ca7dfae9f41603c6be4b3b0e716e5f3fe4677717c67ef4f/icemac.addressbook-1.2.0.tar.gz",
+                "size": 114136
+            }
+        ],
+        "2.4.1": [
+            {
+                "has_sig": false,
+                "upload_time": "2014-03-08T19:48:53",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/ac/10/59cdc3808ea9c5ae3948fe7f6dca59f7cd65f96cb2216cef908578b23d2c/icemac.addressbook-2.4.1.zip",
+                "md5_digest": "daf36b068fdf5cc49479cf10528c7d8a",
+                "downloads": 1894,
+                "filename": "icemac.addressbook-2.4.1.zip",
+                "packagetype": "sdist",
+                "path": "ac/10/59cdc3808ea9c5ae3948fe7f6dca59f7cd65f96cb2216cef908578b23d2c/icemac.addressbook-2.4.1.zip",
+                "size": 449083
+            }
+        ],
+        "2.4.0": [
+            {
+                "has_sig": false,
+                "upload_time": "2014-03-07T21:21:39",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/cc/80/91e4402def9b39909ee62adbd702cfa1b4fc786ef42f64ff969a1b63a75d/icemac.addressbook-2.4.0.zip",
+                "md5_digest": "19adc122c3b3ce4ab1136a39d9d194ba",
+                "downloads": 1803,
+                "filename": "icemac.addressbook-2.4.0.zip",
+                "packagetype": "sdist",
+                "path": "cc/80/91e4402def9b39909ee62adbd702cfa1b4fc786ef42f64ff969a1b63a75d/icemac.addressbook-2.4.0.zip",
+                "size": 448577
+            }
+        ],
+        "2.5.2": [
+            {
+                "has_sig": false,
+                "upload_time": "2014-12-18T20:18:22",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/0c/cc/5cc18b7f8b158799115640954b1f505d0a7d84697d5f4805d2cd89661eb4/icemac.addressbook-2.5.2.zip",
+                "md5_digest": "117fe16aab666d53300191da05ec506a",
+                "downloads": 1205,
+                "filename": "icemac.addressbook-2.5.2.zip",
+                "packagetype": "sdist",
+                "path": "0c/cc/5cc18b7f8b158799115640954b1f505d0a7d84697d5f4805d2cd89661eb4/icemac.addressbook-2.5.2.zip",
+                "size": 459329
+            }
+        ],
+        "2.5.3": [
+            {
+                "has_sig": false,
+                "upload_time": "2014-12-23T08:43:35",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/c1/6b/44e65621649cf6f98c48a4662cb17ea43eeb4e6c73a186635dbe03452bae/icemac.addressbook-2.5.3.zip",
+                "md5_digest": "d2bb1f8c6b935a445b623e39cea1266c",
+                "downloads": 1355,
+                "filename": "icemac.addressbook-2.5.3.zip",
+                "packagetype": "sdist",
+                "path": "c1/6b/44e65621649cf6f98c48a4662cb17ea43eeb4e6c73a186635dbe03452bae/icemac.addressbook-2.5.3.zip",
+                "size": 459631
+            }
+        ],
+        "2.5.0": [
+            {
+                "has_sig": false,
+                "upload_time": "2014-07-01T19:29:32",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/d5/cd/5d2387fbe9c91846b8eb0947c534b33b1f4276e89409e86004448f70dc6f/icemac.addressbook-2.5.0.zip",
+                "md5_digest": "5011b56788c7fb1558a7f850d2df02ab",
+                "downloads": 1547,
+                "filename": "icemac.addressbook-2.5.0.zip",
+                "packagetype": "sdist",
+                "path": "d5/cd/5d2387fbe9c91846b8eb0947c534b33b1f4276e89409e86004448f70dc6f/icemac.addressbook-2.5.0.zip",
+                "size": 458289
+            }
+        ],
+        "2.5.1": [
+            {
+                "has_sig": false,
+                "upload_time": "2014-07-03T19:22:25",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/43/00/627f4f62349d2aa158aeb730247a30a1e25a8b3a37680a16cae472169933/icemac.addressbook-2.5.1.zip",
+                "md5_digest": "ee7c4bba48c04ce9530b127f326cdbfc",
+                "downloads": 1764,
+                "filename": "icemac.addressbook-2.5.1.zip",
+                "packagetype": "sdist",
+                "path": "43/00/627f4f62349d2aa158aeb730247a30a1e25a8b3a37680a16cae472169933/icemac.addressbook-2.5.1.zip",
+                "size": 458910
+            }
+        ],
+        "2.6.1": [
+            {
+                "has_sig": false,
+                "upload_time": "2016-03-08T19:54:16",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/51/5b/81fda788095732dc00dc5f8197c16d5ee6fbf438a341c99624821168361d/icemac.addressbook-2.6.1.tar.gz",
+                "md5_digest": "fefc635ff01603b2d393c250f13aa4ce",
+                "downloads": 105,
+                "filename": "icemac.addressbook-2.6.1.tar.gz",
+                "packagetype": "sdist",
+                "path": "51/5b/81fda788095732dc00dc5f8197c16d5ee6fbf438a341c99624821168361d/icemac.addressbook-2.6.1.tar.gz",
+                "size": 302823
+            }
+        ],
+        "2.6.3": [
+            {
+                "has_sig": false,
+                "upload_time": "2016-04-16T11:29:17",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/3d/7f/5b57166c64ea228a05b6623cdb9b2d52eb948b01879106254225f673b111/icemac.addressbook-2.6.3.tar.gz",
+                "md5_digest": "a5548a687402555dc98ce015ec7ab871",
+                "downloads": 105,
+                "filename": "icemac.addressbook-2.6.3.tar.gz",
+                "packagetype": "sdist",
+                "path": "3d/7f/5b57166c64ea228a05b6623cdb9b2d52eb948b01879106254225f673b111/icemac.addressbook-2.6.3.tar.gz",
+                "size": 303323
+            }
+        ],
+        "1.10.5": [
+            {
+                "has_sig": false,
+                "upload_time": "2013-09-29T18:38:48",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/dd/01/36f28ce3db10431ec21245233e6562fc609d8301003b981b28fb3aedcf67/icemac.addressbook-1.10.5.zip",
+                "md5_digest": "dbf75eec1bb90195b2df0e764f16c136",
+                "downloads": 2026,
+                "filename": "icemac.addressbook-1.10.5.zip",
+                "packagetype": "sdist",
+                "path": "dd/01/36f28ce3db10431ec21245233e6562fc609d8301003b981b28fb3aedcf67/icemac.addressbook-1.10.5.zip",
+                "size": 414351
+            }
+        ],
+        "1.10.2": [
+            {
+                "has_sig": false,
+                "upload_time": "2013-07-15T18:44:53",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/40/b2/dff32725dfe313fb6c6620d7e10f54b7b076b2dec7c644dabd108bb7221a/icemac.addressbook-1.10.2.tar.gz",
+                "md5_digest": "fcd98104f6f4a0f384ae171082c48d9b",
+                "downloads": 2193,
+                "filename": "icemac.addressbook-1.10.2.tar.gz",
+                "packagetype": "sdist",
+                "path": "40/b2/dff32725dfe313fb6c6620d7e10f54b7b076b2dec7c644dabd108bb7221a/icemac.addressbook-1.10.2.tar.gz",
+                "size": 103510
+            }
+        ],
+        "2.7.1": [
+            {
+                "has_sig": false,
+                "upload_time": "2016-06-26T12:33:46",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/5f/19/d18cebd4e4a7257f3ce3e0b2679b184691ff145bfd3c04dd92f165191311/icemac.addressbook-2.7.1.tar.gz",
+                "md5_digest": "1d58c1c8c9f6509f814fe25208c6af30",
+                "downloads": 113,
+                "filename": "icemac.addressbook-2.7.1.tar.gz",
+                "packagetype": "sdist",
+                "path": "5f/19/d18cebd4e4a7257f3ce3e0b2679b184691ff145bfd3c04dd92f165191311/icemac.addressbook-2.7.1.tar.gz",
+                "size": 276645
+            }
+        ],
+        "1.10.0": [
+            {
+                "has_sig": false,
+                "upload_time": "2013-06-21T15:49:39",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/ae/66/b2644d52bb52216a01c1df059bc4a099dceacb39c1399d3936f68d5ef417/icemac.addressbook-1.10.0.zip",
+                "md5_digest": "efe888c6c6c74dcc98e1eab496cd4403",
+                "downloads": 2069,
+                "filename": "icemac.addressbook-1.10.0.zip",
+                "packagetype": "sdist",
+                "path": "ae/66/b2644d52bb52216a01c1df059bc4a099dceacb39c1399d3936f68d5ef417/icemac.addressbook-1.10.0.zip",
+                "size": 410258
+            }
+        ],
+        "1.10.1": [
+            {
+                "has_sig": false,
+                "upload_time": "2013-06-25T19:20:02",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/0d/97/bf69cf7486c1232548abc1d285aca6154a85ca6e499b557fe807c2de3013/icemac.addressbook-1.10.1.zip",
+                "md5_digest": "4eab461515a5139ff8aad5c36ee5d273",
+                "downloads": 2076,
+                "filename": "icemac.addressbook-1.10.1.zip",
+                "packagetype": "sdist",
+                "path": "0d/97/bf69cf7486c1232548abc1d285aca6154a85ca6e499b557fe807c2de3013/icemac.addressbook-1.10.1.zip",
+                "size": 411626
+            }
+        ],
+        "1.10.6": [
+            {
+                "has_sig": false,
+                "upload_time": "2013-09-30T18:44:38",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/45/68/6a25365483078b3c1d860386778eb594815f8e97a22a71d8916174d6ba13/icemac.addressbook-1.10.6.zip",
+                "md5_digest": "5fd023f962a41b7dc0d261b20016d644",
+                "downloads": 2017,
+                "filename": "icemac.addressbook-1.10.6.zip",
+                "packagetype": "sdist",
+                "path": "45/68/6a25365483078b3c1d860386778eb594815f8e97a22a71d8916174d6ba13/icemac.addressbook-1.10.6.zip",
+                "size": 414471
+            }
+        ],
+        "1.1.2": [
+            {
+                "has_sig": false,
+                "upload_time": "2010-01-27T20:28:11",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/92/47/b20f315d29fffc86c181f53aaba0656845154411e12c1aa8f982da5188a3/icemac.addressbook-1.1.2.tar.gz",
+                "md5_digest": "56e76a9b8e4651eaef88b15bcf9b745d",
+                "downloads": 3036,
+                "filename": "icemac.addressbook-1.1.2.tar.gz",
+                "packagetype": "sdist",
+                "path": "92/47/b20f315d29fffc86c181f53aaba0656845154411e12c1aa8f982da5188a3/icemac.addressbook-1.1.2.tar.gz",
+                "size": 112974
+            }
+        ],
+        "0.5.3": [
+            {
+                "has_sig": false,
+                "upload_time": "2009-11-22T16:28:31",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/65/3f/5ab5852fc0cd7cd9c2c54d9f02dcec35abf6736aa4f82157d864df48c7ed/icemac.addressbook-0.5.3.tar.gz",
+                "md5_digest": "2ef85e7320e8a009484dd35780c5c0fc",
+                "downloads": 3055,
+                "filename": "icemac.addressbook-0.5.3.tar.gz",
+                "packagetype": "sdist",
+                "path": "65/3f/5ab5852fc0cd7cd9c2c54d9f02dcec35abf6736aa4f82157d864df48c7ed/icemac.addressbook-0.5.3.tar.gz",
+                "size": 104059
+            }
+        ],
+        "1.10.4": [
+            {
+                "has_sig": false,
+                "upload_time": "2013-07-30T12:37:01",
+                "comment_text": "",
+                "python_version": "source",
+                "url": "https://pypi.python.org/packages/fe/75/3a8408934d69854938e4bd12d6109a327c781fd187fd342fe6c3387459d3/icemac.addressbook-1.10.4.zip",
+                "md5_digest": "35b6f39922b70ad4e659db2d4afaf074",
+                "downloads": 2154,
+                "filename": "icemac.addressbook-1.10.4.zip",
+                "packagetype": "sdist",
+                "path": "fe/75/3a8408934d69854938e4bd12d6109a327c781fd187fd342fe6c3387459d3/icemac.addressbook-1.10.4.zip",
+                "size": 414077
+            }
+        ]
+    },
+    "urls": [
+        {
+            "has_sig": false,
+            "upload_time": "2016-08-28T14:23:29",
+            "comment_text": "",
+            "python_version": "source",
+            "url": "https://pypi.python.org/packages/f9/e6/3b40e95936e32fa3d46cc5807785217c6444c086e669ccffffe0a2dff6ee/icemac.addressbook-2.8.tar.gz",
+            "md5_digest": "36057f84c37c93d125eb654ae66a49ae",
+            "downloads": 320,
+            "filename": "icemac.addressbook-2.8.tar.gz",
+            "packagetype": "sdist",
+            "path": "f9/e6/3b40e95936e32fa3d46cc5807785217c6444c086e669ccffffe0a2dff6ee/icemac.addressbook-2.8.tar.gz",
+            "size": 276749
+        }
+    ]
+}
