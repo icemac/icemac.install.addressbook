@@ -1,10 +1,15 @@
-import zipfile
+import os.path
+from .cmd import call_cmd
 import json
+import os
+import sys
 import urllib
+import zipfile
 
 
 PYPI_JSON_URL = (
     'https://pypi.python.org/simple/icemac.addressbook/json')
+CURRENT_NAME = 'current'
 
 
 def download_url(version):
@@ -31,3 +36,16 @@ def extract_zipfile(file):
     with zipfile.ZipFile(file) as zip_file:
         zip_file.extractall()
         return zip_file.namelist()[0].strip('/')
+
+
+def install(dir_name, stdin=None):
+    """Run the address book installer in `dir_name`."""
+    cwd = os.getcwd()
+    os.chdir(dir_name)
+    args = [sys.executable, 'install.py']
+    if os.path.exists(CURRENT_NAME):
+        args.append(CURRENT_NAME)
+    try:
+        call_cmd(*args)
+    finally:
+        os.chdir(cwd)
