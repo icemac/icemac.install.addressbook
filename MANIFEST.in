@@ -1,0 +1,22 @@
+include *.py
+include *.rst
+include *.txt
+include .coveragerc
+include buildout.cfg
+include pytest.ini
+
+exclude bootstrap.py
+exclude buildout.cfg
+exclude MANIFEST.in
+exclude pytest.ini
+
+exclude src/icemac/update/addressbook/fixtures
+
+recursive-include src *.json
+recursive-exclude src *.json
+
+recursive-include src *.zip
+recursive-exclude src *.zip
+
+recursive-exclude src test_*
+recursive-exclude src conftest.py
