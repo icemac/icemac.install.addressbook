@@ -100,3 +100,4 @@ TODO
 ====
 
 * Prerequisites_ (s. above)
+* MANIFEST.in
