@@ -15,8 +15,7 @@ def archive(version):
         os.mkdir(ARCHIVE_DIR_NAME)
     target_archive = "{archive_dir}/{dirname}.tar.bz2".format(
         archive_dir=ARCHIVE_DIR_NAME, dirname=dirname)
-    call_cmd('tar -cjf {target} {dirname}'.format(
-        target=target_archive, dirname=dirname))
+    call_cmd('tar', '-cjf', target_archive, dirname)
     shutil.rmtree(dirname)
     return "{dirname} archived to {target}".format(
         dirname=dirname, target=target_archive)
