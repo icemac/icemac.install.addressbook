@@ -67,8 +67,8 @@ Where ``4.2`` is the number of the version you want to install.
 
 The script executes the following steps:
 
-1. Download the source distribution of `icemac.addressbook` to a directory
-   named ``sources``.
+1. Download the source distribution of `icemac.addressbook` to a temporary
+   directory.
 2. Extract the source distribution to the current working directory.
 3. Run the install script. If there is a symlink named ``current`` pointing to
    a previous `icemac.addressbook` installation it uses its
