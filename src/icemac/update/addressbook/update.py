@@ -1,3 +1,4 @@
+import zipfile
 import json
 import urllib
 
@@ -20,3 +21,13 @@ def download_url(version):
             return package['url']
     raise ValueError(
         'Release {!r} does not have an sdist release.'.format(version))
+
+
+def extract_zipfile(file):
+    """Extract a file object as a zip file to a temporary directory.
+
+    Returns the path to the extraction directory.
+    """
+    with zipfile.ZipFile(file) as zip_file:
+        zip_file.extractall()
+        return zip_file.namelist()[0].strip('/')
