@@ -26,9 +26,9 @@ setup(
     author='Michael Howitz',
     author_email='icemac@gmx.net',
     license='ZPL 2.1',
-    url='https://bitbucket.org/icemac/icemac.update.addressbook/',
+    url='https://github.com/icemac/icemac.install.addressbook',
 
-    keywords='icemac addressbook install update',
+    keywords='icemac addressbook install update archive manage',
     classifiers="""\
 Development Status :: 4 - Beta
 Environment :: Console
