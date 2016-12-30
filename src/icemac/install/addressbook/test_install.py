@@ -1,4 +1,4 @@
-from update import download_url, extract_zipfile, install, CURRENT_NAME
+from install import download_url, extract_zipfile, install, CURRENT_NAME
 import contextlib
 import io
 import mock
@@ -78,7 +78,7 @@ def test_update__install__1(basedir):
 def test_update__install__2(basedir):
     """It calls `install.py` with `current` if it exists in cwd."""
     dir_name = str(basedir)
-    with mock.patch('icemac.install.addressbook.update.call_cmd') as call_cmd:
+    with mock.patch('icemac.install.addressbook.install.call_cmd') as call_cmd:
         install(dir_name)
         call_cmd.assert_called_with(sys.executable, 'install.py')
 

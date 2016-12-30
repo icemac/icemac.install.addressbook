@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 
 setup(
-    name='icemac.update.addressbook',
+    name='icemac.install.addressbook',
     version='1.0.dev0',
 
     install_requires=[
@@ -18,8 +18,8 @@ setup(
 
     entry_points={
         'console_scripts': [
-            'update-addressbook = icemac.update.addressbook.update:main',
-            'archive-addressbook = icemac.update.addressbook.archive:main',
+            'install-addressbook = icemac.install.addressbook.install:main',
+            'archive-addressbook = icemac.install.addressbook.archive:main',
         ],
     },
 
