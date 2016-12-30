@@ -1,4 +1,4 @@
-"""poor man's integration testing"""
+"""Install, update and archive installations of icemac.addressbook."""
 
 from setuptools import setup, find_packages
 

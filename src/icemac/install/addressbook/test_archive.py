@@ -19,7 +19,7 @@ def archive_dir(basedir):
 
 def test_archive__main__1():
     """It calls `archive` with the requested version number."""
-    with mock.patch('icemac.update.addressbook.archive.archive') as archive:
+    with mock.patch('icemac.install.addressbook.archive.archive') as archive:
         main(['4.3'])
     archive.assert_called_with('4.3')
 

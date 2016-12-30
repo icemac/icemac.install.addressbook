@@ -10,7 +10,7 @@ exclude buildout.cfg
 exclude MANIFEST.in
 exclude pytest.ini
 
-exclude src/icemac/update/addressbook/fixtures
+exclude src/icemac/install/addressbook/fixtures
 
 recursive-include src *.json
 recursive-exclude src *.json

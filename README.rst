@@ -1,9 +1,9 @@
-=========================
-icemac.update.addressbook
-=========================
+==========================
+icemac.install.addressbook
+==========================
 
-Scripts to update the installation of `icemac.addressbook`_  to a new version
-of the package.
+Scripts to ease the installation and update an existing installation of
+`icemac.addressbook`_  to a new version of the package.
 
 .. _`icemac.addressbook` : https://pypi.org/project/icemac.addressbook/
 
@@ -31,39 +31,31 @@ this package:
 
 * ``tar`` with bzip2 support
 
-
-.. XXX sure about this?
-
-
-To use the scripts in this package you need an existing installation of `icemac.addressbook`, see Installation_.
-
-.. _Installation : https://bitbucket.org/icemac/icemac.addressbook/wiki/Installation
-
-The `icemac.addressbook` package has to be ...
-
 Installation of the update scripts
 ==================================
 
-Install the package `icemac.update.addressbook` using pip::
+Install the package `icemac.install.addressbook` using pip::
 
-    $ pip install icemac.update.addressbook
+    $ pip install icemac.install.addressbook
 
 This creates two scripts in the `bin` directory:
 
-    * ``update-addressbook``
+    * ``install-addressbook``
     * ``archive-addressbook``
 
 Usage
 =====
 
-update-addressbook
-------------------
+install-addressbook
+-------------------
 
 Start the script using::
 
-    $ update-addressbook 4.2
+    $ install-addressbook 4.2
 
-Where ``4.2`` is the number of the version you want to install.
+Where ``4.2`` is the number of the version you want to install resp. you want
+to update to.
+
 
 The script executes the following steps:
 
@@ -74,12 +66,14 @@ The script executes the following steps:
    a previous `icemac.addressbook` installation it uses its
    configuration as default answers for the questions in the installation
    process.
-4. Change the target of the symlink named ``current`` to point to the new
-   installation.
+4. Create a new symlink named ``current`` pointing to the new installation.
 
 
 archive-addressbook
 -------------------
+
+After installing a new version of the address book you could archive the
+previous one using this script.
 
 Start the script using::
 
@@ -90,14 +84,7 @@ Where ``4.1`` is the version number of the installation you want to archive.
 The script executes the following steps:
 
 1. Create a bzipped tar archive (.tar.bz2) of the requested
-   `icemac.addressbook` installation (as installed by update-addressbook_) in a
-   directory named ``archive``.
+   `icemac.addressbook` installation (as installed by install-addressbook_) in
+   a directory named ``archive``. (The ``archive`` directory is created if it
+   not yet exists.)
 2. Delete the requested `icemac.addressbook` installation.
-
-
-
-TODO
-====
-
-* Prerequisites_ (s. above)
-* MANIFEST.in

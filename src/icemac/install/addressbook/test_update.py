@@ -26,7 +26,7 @@ def test_update__download_url__1():
     """It returns the URL to download the specified address book version."""
     with mock.patch('urllib.urlopen') as urlopen:
         urlopen.return_value = pkg_resources.resource_stream(
-            'icemac.update.addressbook', 'fixtures/icemac.addressbook.json')
+            'icemac.install.addressbook', 'fixtures/icemac.addressbook.json')
         assert (
             'https://pypi.python.org/packages/dd/01/'
             '36f28ce3db10431ec21245233e6562fc609d8301003b981b28fb3aedcf67/'
@@ -37,7 +37,7 @@ def test_update__download_url__2():
     """It raises a ValueError if the specified version does not exist."""
     with mock.patch('urllib.urlopen') as urlopen:
         urlopen.return_value = pkg_resources.resource_stream(
-            'icemac.update.addressbook', 'fixtures/icemac.addressbook.json')
+            'icemac.install.addressbook', 'fixtures/icemac.addressbook.json')
         with pytest.raises(ValueError) as err:
             download_url('24.11')
         assert "Release '24.11' does not exist." == str(err.value)
@@ -47,7 +47,7 @@ def test_update__download_url__3():
     """It raises a ValueError if the specified version has not sdist."""
     with mock.patch('urllib.urlopen') as urlopen:
         urlopen.return_value = pkg_resources.resource_stream(
-            'icemac.update.addressbook', 'fixtures/icemac.addressbook.json')
+            'icemac.install.addressbook', 'fixtures/icemac.addressbook.json')
         with pytest.raises(ValueError) as err:
             download_url('1.1.1')
         assert ("Release '1.1.1' does not have an sdist release." ==
@@ -55,7 +55,7 @@ def test_update__download_url__3():
 
 
 example_zip = pkg_resources.resource_stream(
-    'icemac.update.addressbook', 'fixtures/icemac.addressbook-2.0.1.zip')
+    'icemac.install.addressbook', 'fixtures/icemac.addressbook-2.0.1.zip')
 
 
 def test_update__extract_zipfile__1(basedir):
@@ -78,7 +78,7 @@ def test_update__install__1(basedir):
 def test_update__install__2(basedir):
     """It calls `install.py` with `current` if it exists in cwd."""
     dir_name = str(basedir)
-    with mock.patch('icemac.update.addressbook.update.call_cmd') as call_cmd:
+    with mock.patch('icemac.install.addressbook.update.call_cmd') as call_cmd:
         install(dir_name)
         call_cmd.assert_called_with(sys.executable, 'install.py')
 
