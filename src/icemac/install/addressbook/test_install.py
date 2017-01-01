@@ -1,4 +1,5 @@
 from install import download_url, extract_zipfile, install, CURRENT_NAME
+from install import symlink
 import contextlib
 import io
 import mock
@@ -86,3 +87,23 @@ def test_update__install__2(basedir):
         basedir.mkdir(CURRENT_NAME)
         install(dir_name)
         call_cmd.assert_called_with(sys.executable, 'install.py', 'current')
+
+
+def test_update__symlink__1(basedir):
+    """It creates a symlink named `current` to the given directory."""
+    basedir.mkdir('icemac.addressbook-2.1.2')
+    symlink('icemac.addressbook-2.1.2')
+    assert os.path.islink(CURRENT_NAME)
+    assert os.path.exists(CURRENT_NAME)  # assert the link is not broken
+    assert os.path.realpath(CURRENT_NAME).endswith('icemac.addressbook-2.1.2')
+
+
+def test_update__symlink__2(basedir):
+    """It replaces an existing symlink."""
+    basedir.mkdir('icemac.addressbook-2.1.2')
+    basedir.mkdir('icemac.addressbook-2.1.3')
+    symlink('icemac.addressbook-2.1.2')
+    symlink('icemac.addressbook-2.1.3')
+    assert os.path.islink(CURRENT_NAME)
+    assert os.path.exists(CURRENT_NAME)  # assert the link is not broken
+    assert os.path.realpath(CURRENT_NAME).endswith('icemac.addressbook-2.1.3')
