@@ -1,8 +1,8 @@
-import os.path
 from .cmd import call_cmd
 import argparse
 import json
 import os
+import os.path
 import requests
 import sys
 import urllib
