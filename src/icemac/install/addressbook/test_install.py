@@ -4,6 +4,7 @@ import contextlib
 import io
 import mock
 import os.path
+import pathlib
 import pkg_resources
 import pytest
 import sys
@@ -38,11 +39,14 @@ def user_input(input, stdin):
     yield
 
 
+local_pypi_json_url = pathlib.Path(pkg_resources.resource_filename(
+    'icemac.install.addressbook', 'fixtures/icemac.addressbook.json')).as_uri()
+
+
 def test_update__download_url__1():
     """It returns the URL to download the specified address book version."""
-    with mock.patch('urllib.urlopen') as urlopen:
-        urlopen.return_value = pkg_resources.resource_stream(
-            'icemac.install.addressbook', 'fixtures/icemac.addressbook.json')
+    with mock.patch('icemac.install.addressbook.install.PYPI_JSON_URL',
+                    new=local_pypi_json_url):
         assert (
             'https://pypi.python.org/packages/dd/01/'
             '36f28ce3db10431ec21245233e6562fc609d8301003b981b28fb3aedcf67/'
@@ -51,9 +55,8 @@ def test_update__download_url__1():
 
 def test_update__download_url__2():
     """It raises a ValueError if the specified version does not exist."""
-    with mock.patch('urllib.urlopen') as urlopen:
-        urlopen.return_value = pkg_resources.resource_stream(
-            'icemac.install.addressbook', 'fixtures/icemac.addressbook.json')
+    with mock.patch('icemac.install.addressbook.install.PYPI_JSON_URL',
+                    new=local_pypi_json_url):
         with pytest.raises(ValueError) as err:
             download_url('24.11')
         assert "Release '24.11' does not exist." == str(err.value)
@@ -61,9 +64,8 @@ def test_update__download_url__2():
 
 def test_update__download_url__3():
     """It raises a ValueError if the specified version has not sdist."""
-    with mock.patch('urllib.urlopen') as urlopen:
-        urlopen.return_value = pkg_resources.resource_stream(
-            'icemac.install.addressbook', 'fixtures/icemac.addressbook.json')
+    with mock.patch('icemac.install.addressbook.install.PYPI_JSON_URL',
+                    new=local_pypi_json_url):
         with pytest.raises(ValueError) as err:
             download_url('1.1.1')
         assert ("Release '1.1.1' does not have an sdist release." ==

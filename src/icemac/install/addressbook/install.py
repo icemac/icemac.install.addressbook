@@ -1,11 +1,9 @@
 from .cmd import call_cmd
 import argparse
-import json
 import os
 import os.path
 import requests
 import sys
-import urllib
 import zipfile
 
 
@@ -26,8 +24,8 @@ CURRENT_NAME = 'current'
 
 def download_url(version):
     """Get the download_url."""
-    with urllib.urlopen(PYPI_JSON_URL.format(version)) as f:
-        data = json.load(f)
+    r = requests_session.get(PYPI_JSON_URL)
+    data = r.json()
     releases = data['releases']
     try:
         packages = releases[version]

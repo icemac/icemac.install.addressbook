@@ -14,6 +14,7 @@ setup(
     extras_require={
         'test': [
             'mock',
+            'pathlib',
             'requests-file',
         ],
     },
