@@ -27,7 +27,7 @@ def test_update__main__1():
 
 @contextlib.contextmanager
 def user_input(input, stdin):
-    r"""Write `input` on `stdin`.
+    """Write `input` on `stdin`.
 
     Taken from icemac.addressbook + adapted to use it here.
     """
@@ -72,8 +72,9 @@ def test_update__download_url__3():
                 str(err.value))
 
 
-example_url = "file://{}".format(pkg_resources.resource_filename(
-    'icemac.install.addressbook', 'fixtures/icemac.addressbook-2.0.1.zip'))
+example_url = pathlib.Path(pkg_resources.resource_filename(
+    'icemac.install.addressbook',
+    'fixtures/icemac.addressbook-2.0.1.zip')).as_uri()
 
 
 def test_update__extract_zipfile_from__1(basedir):
