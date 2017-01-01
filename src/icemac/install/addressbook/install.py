@@ -1,10 +1,22 @@
 import os.path
 from .cmd import call_cmd
+import argparse
 import json
 import os
+import requests
 import sys
 import urllib
 import zipfile
+
+
+requests_session = requests.Session()
+try:
+    import requests_file
+except ImportError:  # pragma: nocover
+    # We are not running the tests now:
+    pass
+else:
+    requests_session.mount('file://', requests_file.FileAdapter())
 
 
 PYPI_JSON_URL = (
@@ -28,12 +40,13 @@ def download_url(version):
         'Release {!r} does not have an sdist release.'.format(version))
 
 
-def extract_zipfile(file):
-    """Extract a file object as a zip file to a temporary directory.
+def extract_zipfile_from(url):
+    """Download the zipfile from `url` and extract it to a temporary directory.
 
     Returns the path to the extraction directory.
     """
-    with zipfile.ZipFile(file) as zip_file:
+    r = requests_session.get(url, stream=True)
+    with zipfile.ZipFile(r.raw) as zip_file:
         zip_file.extractall()
         return zip_file.namelist()[0].strip('/')
 
@@ -56,3 +69,19 @@ def symlink(dir_name):
     if os.path.lexists(CURRENT_NAME):
         os.unlink(CURRENT_NAME)
     os.symlink(dir_name, CURRENT_NAME)
+
+
+def main(args=None):
+    """Entry point for `bin/update-addressbook`."""
+    parser = argparse.ArgumentParser(
+        description='Update the address book to a new version.')
+    parser.add_argument(
+        'version',
+        help='Version number of the icemac.addressbook package you want to '
+             'install')
+
+    args = parser.parse_args(args)
+    url = download_url(args.version)
+    dir_name = extract_zipfile_from(url)
+    install(dir_name)
+    symlink(dir_name)

@@ -8,11 +8,13 @@ setup(
     version='1.0.dev0',
 
     install_requires=[
+        'requests',
     ],
 
     extras_require={
         'test': [
             'mock',
+            'requests-file',
         ],
     },
 
