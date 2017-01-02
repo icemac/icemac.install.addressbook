@@ -37,6 +37,19 @@ def test_update__main__1(local_pypi):
     symlink.assert_called_with('icemac.addressbook-2.6.2')
 
 
+def test_update__main__2(local_pypi):
+    """It defaults to the newest version."""
+    path = 'icemac.install.addressbook.install'
+    with mock.patch(path + '.extract_zipfile_from') as extract_zipfile,\
+            mock.patch(path + '.install'),\
+            mock.patch(path + '.symlink'):
+        main([])
+    extract_zipfile.assert_called_with(
+        'https://pypi.python.org/packages/f9/e6/'
+        '3b40e95936e32fa3d46cc5807785217c6444c086e669ccffffe0a2dff6ee/'
+        'icemac.addressbook-2.8.tar.gz')
+
+
 @contextlib.contextmanager
 def user_input(input, stdin):
     """Write `input` on `stdin`.
@@ -71,6 +84,17 @@ def test_update__download_url__3(local_pypi):
     with pytest.raises(ValueError) as err:
         download_url('1.1.1')
     assert "Release '1.1.1' does not have an sdist release." == str(err.value)
+
+
+def test_update__download_url__4(local_pypi):
+    """It returns the URL of the newest address book version if ...
+
+    called with `None` as version.
+    """
+    assert (
+        'https://pypi.python.org/packages/f9/e6/'
+        '3b40e95936e32fa3d46cc5807785217c6444c086e669ccffffe0a2dff6ee/'
+        'icemac.addressbook-2.8.tar.gz' == download_url(None))
 
 
 example_url = pathlib.Path(pkg_resources.resource_filename(

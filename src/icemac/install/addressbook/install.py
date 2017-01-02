@@ -27,6 +27,8 @@ def download_url(version):
     r = requests_session.get(PYPI_JSON_URL)
     data = r.json()
     releases = data['releases']
+    if version is None:
+        version = data['info']['version']
     try:
         packages = releases[version]
     except KeyError:
@@ -75,8 +77,9 @@ def main(args=None):
         description='Update the address book to a new version.')
     parser.add_argument(
         'version',
+        nargs=argparse.OPTIONAL,
         help='Version number of the icemac.addressbook package you want to '
-             'install')
+             'install. Defaults to the newest version.')
 
     args = parser.parse_args(args)
     url = download_url(args.version)

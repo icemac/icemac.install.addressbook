@@ -51,10 +51,10 @@ install-addressbook
 
 Start the script using::
 
-    $ install-addressbook 4.2
+    $ bin/install-addressbook [VERSION_NUMBER]
 
-Where ``4.2`` is the number of the version you want to install resp. you want
-to update to.
+Where ``VERSION_NUMBER`` is the number of the version you want to install resp.
+you want to update to. If you leave it out the newest version is used.
 
 
 The script executes the following steps:
