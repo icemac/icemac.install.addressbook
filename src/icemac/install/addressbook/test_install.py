@@ -10,19 +10,31 @@ import pytest
 import sys
 
 
-def test_update__main__1():
+@pytest.fixture('function')
+def local_pypi():
+    """Patch the call to PyPI to a file URL."""
+    url = pathlib.Path(pkg_resources.resource_filename(
+        'icemac.install.addressbook',
+        'fixtures/icemac.addressbook.json')).as_uri()
+    with mock.patch('icemac.install.addressbook.install.PYPI_JSON_URL',
+                    new=url):
+        yield
+
+
+def test_update__main__1(local_pypi):
     """It calls some functions with appropriate parameters."""
     path = 'icemac.install.addressbook.install'
-    with mock.patch(path + '.download_url') as download_url,\
-            mock.patch(path + '.extract_zipfile_from') as extract_zipfile,\
+    with mock.patch(path + '.extract_zipfile_from') as extract_zipfile,\
             mock.patch(path + '.install') as install,\
             mock.patch(path + '.symlink') as symlink:
-        download_url.return_value = 'http://url.to/icemac.addressbook-4.3.zip'
-        extract_zipfile.return_value = 'icemac.addressbook-4.3'
-        main(['4.3'])
-    download_url.assert_called_with('4.3')
-    install.assert_called_with('icemac.addressbook-4.3')
-    symlink.assert_called_with('icemac.addressbook-4.3')
+        extract_zipfile.return_value = 'icemac.addressbook-2.6.2'
+        main(['2.6.2'])
+    extract_zipfile.assert_called_with(
+        'https://pypi.python.org/packages/16/28/'
+        '6524d23dcdf5f40579b0bd81bb3ccfb5375a4093990b8a1d3780288442c6/'
+        'icemac.addressbook-2.6.2.tar.gz')
+    install.assert_called_with('icemac.addressbook-2.6.2')
+    symlink.assert_called_with('icemac.addressbook-2.6.2')
 
 
 @contextlib.contextmanager
@@ -39,37 +51,26 @@ def user_input(input, stdin):
     yield
 
 
-local_pypi_json_url = pathlib.Path(pkg_resources.resource_filename(
-    'icemac.install.addressbook', 'fixtures/icemac.addressbook.json')).as_uri()
-
-
-def test_update__download_url__1():
+def test_update__download_url__1(local_pypi):
     """It returns the URL to download the specified address book version."""
-    with mock.patch('icemac.install.addressbook.install.PYPI_JSON_URL',
-                    new=local_pypi_json_url):
-        assert (
-            'https://pypi.python.org/packages/dd/01/'
-            '36f28ce3db10431ec21245233e6562fc609d8301003b981b28fb3aedcf67/'
-            'icemac.addressbook-1.10.5.zip' == download_url('1.10.5'))
+    assert (
+        'https://pypi.python.org/packages/dd/01/'
+        '36f28ce3db10431ec21245233e6562fc609d8301003b981b28fb3aedcf67/'
+        'icemac.addressbook-1.10.5.zip' == download_url('1.10.5'))
 
 
-def test_update__download_url__2():
+def test_update__download_url__2(local_pypi):
     """It raises a ValueError if the specified version does not exist."""
-    with mock.patch('icemac.install.addressbook.install.PYPI_JSON_URL',
-                    new=local_pypi_json_url):
-        with pytest.raises(ValueError) as err:
-            download_url('24.11')
-        assert "Release '24.11' does not exist." == str(err.value)
+    with pytest.raises(ValueError) as err:
+        download_url('24.11')
+    assert "Release '24.11' does not exist." == str(err.value)
 
 
-def test_update__download_url__3():
+def test_update__download_url__3(local_pypi):
     """It raises a ValueError if the specified version has not sdist."""
-    with mock.patch('icemac.install.addressbook.install.PYPI_JSON_URL',
-                    new=local_pypi_json_url):
-        with pytest.raises(ValueError) as err:
-            download_url('1.1.1')
-        assert ("Release '1.1.1' does not have an sdist release." ==
-                str(err.value))
+    with pytest.raises(ValueError) as err:
+        download_url('1.1.1')
+    assert "Release '1.1.1' does not have an sdist release." == str(err.value)
 
 
 example_url = pathlib.Path(pkg_resources.resource_filename(
