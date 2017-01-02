@@ -77,7 +77,7 @@ previous one using this script.
 
 Start the script using::
 
-    $ archive-addressbook 4.1
+    $ bin/archive-addressbook 4.1
 
 Where ``4.1`` is the version number of the installation you want to archive.
 
