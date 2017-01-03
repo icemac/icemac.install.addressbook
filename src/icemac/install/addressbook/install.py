@@ -19,13 +19,14 @@ else:
 
 
 PYPI_JSON_URL = (
-    'https://pypi.python.org/simple/icemac.addressbook/json')
+    'https://pypi.python.org/pypi/icemac.addressbook/json')
 CURRENT_NAME = 'current'
 
 
 def download_url(version):
     """Get the download_url."""
     r = requests_session.get(PYPI_JSON_URL)
+    r.raise_for_status()
     data = r.json()
     releases = data['releases']
     if version is None:
