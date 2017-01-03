@@ -50,6 +50,23 @@ def test_update__main__2(local_pypi):
         'icemac.addressbook-2.8.tar.gz')
 
 
+def test_update__main__3():
+    """It drops into pdb on an exception if required."""
+    path = 'icemac.install.addressbook.install'
+    with mock.patch(path + '.download_url', side_effect=RuntimeError),\
+            mock.patch('pdb.post_mortem') as post_mortem:
+        main(['--debug'])
+    post_mortem.assert_called_with()
+
+
+def test_update__main__4():
+    """It it raises the exception if debugger is not required."""
+    path = 'icemac.install.addressbook.install'
+    with mock.patch(path + '.download_url', side_effect=RuntimeError),\
+            pytest.raises(RuntimeError):
+        main([])
+
+
 @contextlib.contextmanager
 def user_input(input, stdin):
     """Write `input` on `stdin`.

@@ -2,6 +2,7 @@ from .cmd import call_cmd
 import argparse
 import os
 import os.path
+import pdb  # noqa
 import requests
 import sys
 import zipfile
@@ -80,9 +81,18 @@ def main(args=None):
         nargs=argparse.OPTIONAL,
         help='Version number of the icemac.addressbook package you want to '
              'install. Defaults to the newest version.')
+    parser.add_argument(
+        '--debug', action="store_true",
+        help='Enter debugger on errors.')
 
     args = parser.parse_args(args)
-    url = download_url(args.version)
-    dir_name = extract_zipfile_from(url)
-    install(dir_name)
-    symlink(dir_name)
+    try:
+        url = download_url(args.version)
+        dir_name = extract_zipfile_from(url)
+        install(dir_name)
+        symlink(dir_name)
+    except Exception:
+        if args.debug:
+            pdb.post_mortem()
+        else:
+            raise
