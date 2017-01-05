@@ -1,9 +1,11 @@
-from .cmd import call_cmd
 import argparse
+import itertools
 import os.path
 import shutil
 
 ARCHIVE_DIR_NAME = 'archive'
+# Formats sorted by priority
+DESIRED_ARCHIVE_FORMATS = ('xztar', 'bztar', 'gztar', 'zip', 'tar')
 
 
 def archive(version):
@@ -13,12 +15,14 @@ def archive(version):
         raise ValueError('Directory {!r} does not exist.'.format(dirname))
     if not os.path.exists(ARCHIVE_DIR_NAME):
         os.mkdir(ARCHIVE_DIR_NAME)
-    target_archive = "{archive_dir}/{dirname}.tar.bz2".format(
-        archive_dir=ARCHIVE_DIR_NAME, dirname=dirname)
-    call_cmd('tar', '-cjf', target_archive, dirname)
+    supported_archive_formats = [x[0] for x in shutil.get_archive_formats()]
+    format = next(itertools.ifilter(lambda x: x in supported_archive_formats,
+                                    DESIRED_ARCHIVE_FORMATS))
+    archive = shutil.make_archive(dirname, format, base_dir=dirname)
+    shutil.move(archive, ARCHIVE_DIR_NAME)
     shutil.rmtree(dirname)
-    return "{dirname} archived to {target}".format(
-        dirname=dirname, target=target_archive)
+    return "{dirname} archived to {dir}/{target}".format(
+        dirname=dirname, dir=ARCHIVE_DIR_NAME, target=archive)
 
 
 def main(args=None):

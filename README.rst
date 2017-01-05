@@ -23,13 +23,6 @@ WARRANTIES ARE DISCLAIMED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 WARRANTIES OF TITLE, MERCHANTABILITY, AGAINST INFRINGEMENT, AND FITNESS
 FOR A PARTICULAR PURPOSE.
 
-Prerequisites
-=============
-
-The following software needs to be installed to use the scripts provided by
-this package:
-
-* ``tar`` with bzip2 support
 
 Installation of the update scripts
 ==================================
@@ -83,7 +76,7 @@ Where ``4.1`` is the version number of the installation you want to archive.
 
 The script executes the following steps:
 
-1. Create a bzipped tar archive (.tar.bz2) of the requested
+1. Create an archive of the requested
    `icemac.addressbook` installation (as installed by install-addressbook_) in
    a directory named ``archive``. (The ``archive`` directory is created if it
    not yet exists.)
