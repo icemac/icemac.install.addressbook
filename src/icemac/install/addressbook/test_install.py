@@ -1,4 +1,4 @@
-from install import download_url, extract_zipfile_from, install, CURRENT_NAME
+from install import download_url, extract_archive_from, install, CURRENT_NAME
 from install import symlink, main
 import contextlib
 import io
@@ -24,12 +24,12 @@ def local_pypi():
 def test_update__main__1(local_pypi):
     """It calls some functions with appropriate parameters."""
     path = 'icemac.install.addressbook.install'
-    with mock.patch(path + '.extract_zipfile_from') as extract_zipfile,\
+    with mock.patch(path + '.extract_archive_from') as extract_archive_from,\
             mock.patch(path + '.install') as install,\
             mock.patch(path + '.symlink') as symlink:
-        extract_zipfile.return_value = 'icemac.addressbook-2.6.2'
+        extract_archive_from.return_value = 'icemac.addressbook-2.6.2'
         main(['2.6.2'])
-    extract_zipfile.assert_called_with(
+    extract_archive_from.assert_called_with(
         'https://pypi.python.org/packages/16/28/'
         '6524d23dcdf5f40579b0bd81bb3ccfb5375a4093990b8a1d3780288442c6/'
         'icemac.addressbook-2.6.2.tar.gz')
@@ -40,11 +40,11 @@ def test_update__main__1(local_pypi):
 def test_update__main__2(local_pypi):
     """It defaults to the newest version."""
     path = 'icemac.install.addressbook.install'
-    with mock.patch(path + '.extract_zipfile_from') as extract_zipfile,\
+    with mock.patch(path + '.extract_archive_from') as extract_archive_from,\
             mock.patch(path + '.install'),\
             mock.patch(path + '.symlink'):
         main([])
-    extract_zipfile.assert_called_with(
+    extract_archive_from.assert_called_with(
         'https://pypi.python.org/packages/f9/e6/'
         '3b40e95936e32fa3d46cc5807785217c6444c086e669ccffffe0a2dff6ee/'
         'icemac.addressbook-2.8.tar.gz')
@@ -114,21 +114,33 @@ def test_update__download_url__4(local_pypi):
         'icemac.addressbook-2.8.tar.gz' == download_url(None))
 
 
-example_url = pathlib.Path(pkg_resources.resource_filename(
+example_zip_url = pathlib.Path(pkg_resources.resource_filename(
     'icemac.install.addressbook',
     'fixtures/icemac.addressbook-2.0.1.zip')).as_uri()
 
 
-def test_update__extract_zipfile_from__1(basedir):
-    """It extracts a file like object to a temporary directory."""
-    extract_dir = extract_zipfile_from(example_url)
+example_tgz_url = pathlib.Path(pkg_resources.resource_filename(
+    'icemac.install.addressbook',
+    'fixtures/icemac.addressbook-2.8.tar.gz')).as_uri()
+
+
+def test_update__extract_archive_from__1(basedir):
+    """It downloads a zip file from a url and extracts it to cwd."""
+    extract_dir = extract_archive_from(example_zip_url)
     assert 'icemac.addressbook-2.0.1' == extract_dir
+    assert {'__init__.py', 'install.py'} == set(os.listdir(extract_dir))
+
+
+def test_update__extract_archive_from__2(basedir):
+    """It downloads a tgz file from a url and extracts it to cwd."""
+    extract_dir = extract_archive_from(example_tgz_url)
+    assert 'icemac.addressbook-2.8' == extract_dir
     assert {'__init__.py', 'install.py'} == set(os.listdir(extract_dir))
 
 
 def test_update__install__1(basedir):
     """It runs the address book installer in the given directory."""
-    address_book_dir = extract_zipfile_from(example_url)
+    address_book_dir = extract_archive_from(example_zip_url)
     stdin = io.StringIO()
     with user_input(u'foo', stdin):
         install(address_book_dir, stdin=stdin)

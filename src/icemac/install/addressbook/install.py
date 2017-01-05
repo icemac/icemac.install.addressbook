@@ -1,11 +1,13 @@
+from __future__ import absolute_import
+
 from .cmd import call_cmd
+import archive
 import argparse
 import os
 import os.path
 import pdb  # noqa
 import requests
 import sys
-import zipfile
 
 
 requests_session = requests.Session()
@@ -42,15 +44,18 @@ def download_url(version):
         'Release {!r} does not have an sdist release.'.format(version))
 
 
-def extract_zipfile_from(url):
-    """Download the zipfile from `url` and extract it to a temporary directory.
+def extract_archive_from(url):
+    """Download and archive from `url` and extract it to the current directory.
 
-    Returns the path to the extraction directory.
+    Returns the path to the extracted directory.
     """
     r = requests_session.get(url, stream=True)
-    with zipfile.ZipFile(r.raw) as zip_file:
-        zip_file.extractall()
-        return zip_file.namelist()[0].strip('/')
+    file = archive.Archive(r.raw)
+    file.extract()
+    try:
+        return file.namelist()[0].strip('/')
+    finally:
+        del file  # make sure __del__ of file is called
 
 
 def install(dir_name, stdin=None):
@@ -89,7 +94,7 @@ def main(args=None):
     args = parser.parse_args(args)
     try:
         url = download_url(args.version)
-        dir_name = extract_zipfile_from(url)
+        dir_name = extract_archive_from(url)
         install(dir_name)
         symlink(dir_name)
     except Exception:

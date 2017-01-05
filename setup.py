@@ -9,6 +9,7 @@ setup(
 
     install_requires=[
         'requests',
+        'archive',
     ],
 
     extras_require={
