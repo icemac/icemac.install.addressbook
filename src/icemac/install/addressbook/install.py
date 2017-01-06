@@ -7,7 +7,9 @@ import os
 import os.path
 import pdb  # noqa
 import requests
+import shutil
 import sys
+import tempfile
 
 
 requests_session = requests.Session()
@@ -50,12 +52,17 @@ def extract_archive_from(url):
     Returns the path to the extracted directory.
     """
     r = requests_session.get(url, stream=True)
-    file = archive.Archive(r.raw)
-    file.extract()
-    try:
-        return file.namelist()[0].strip('/')
-    finally:
-        del file  # make sure __del__ of file is called
+    r.raise_for_status()
+    r.raw.decode_content = True
+    with tempfile.NamedTemporaryFile() as download_file:
+        shutil.copyfileobj(r.raw, download_file)
+        download_file.seek(0)
+        file = archive.Archive(download_file, r.url or url)
+        file.extract()
+        try:
+            return file.namelist()[0].strip('/')
+        finally:
+            del file  # make sure __del__ of file is called
 
 
 def install(dir_name, stdin=None):
