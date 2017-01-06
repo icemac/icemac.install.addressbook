@@ -73,7 +73,7 @@ def install(dir_name, stdin=None):
     cwd = os.getcwd()
     args = [sys.executable, 'install.py']
     if os.path.exists(CURRENT_NAME):
-        args.append(CURRENT_NAME)
+        args.append(os.path.join(os.pardir, CURRENT_NAME))
     os.chdir(dir_name)
     try:
         call_cmd(*args)

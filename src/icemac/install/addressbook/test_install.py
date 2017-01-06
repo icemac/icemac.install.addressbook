@@ -179,7 +179,7 @@ def test_update__install__2(basedir):
         call_cmd.reset_mock()
         basedir.mkdir(CURRENT_NAME)
         install(dir_name)
-        call_cmd.assert_called_with(sys.executable, 'install.py', 'current')
+        call_cmd.assert_called_with(sys.executable, 'install.py', '../current')
 
 
 def test_update__symlink__1(basedir):
