@@ -10,6 +10,16 @@ import pytest
 import sys
 
 
+example_zip_url = pathlib.Path(pkg_resources.resource_filename(
+    'icemac.install.addressbook',
+    'fixtures/icemac.addressbook-2.0.1.zip')).as_uri()
+
+
+example_tgz_url = pathlib.Path(pkg_resources.resource_filename(
+    'icemac.install.addressbook',
+    'fixtures/icemac.addressbook-2.8.tar.gz')).as_uri()
+
+
 @pytest.fixture('function')
 def local_pypi():
     """Patch the call to PyPI to a file URL."""
@@ -112,16 +122,6 @@ def test_update__download_url__4(local_pypi):
         'https://pypi.python.org/packages/f9/e6/'
         '3b40e95936e32fa3d46cc5807785217c6444c086e669ccffffe0a2dff6ee/'
         'icemac.addressbook-2.8.tar.gz' == download_url(None))
-
-
-example_zip_url = pathlib.Path(pkg_resources.resource_filename(
-    'icemac.install.addressbook',
-    'fixtures/icemac.addressbook-2.0.1.zip')).as_uri()
-
-
-example_tgz_url = pathlib.Path(pkg_resources.resource_filename(
-    'icemac.install.addressbook',
-    'fixtures/icemac.addressbook-2.8.tar.gz')).as_uri()
 
 
 def test_update__extract_archive_from__1(basedir):
