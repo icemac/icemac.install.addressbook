@@ -18,5 +18,8 @@ recursive-exclude src *.json
 recursive-include src *.zip
 recursive-exclude src *.zip
 
+recursive-include src *.tar.gz
+recursive-exclude src *.tar.gz
+
 recursive-exclude src test_*
 recursive-exclude src conftest.py
