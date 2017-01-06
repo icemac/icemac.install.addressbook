@@ -24,8 +24,8 @@ WARRANTIES OF TITLE, MERCHANTABILITY, AGAINST INFRINGEMENT, AND FITNESS
 FOR A PARTICULAR PURPOSE.
 
 
-Installation of the update scripts
-==================================
+Installation of the scripts
+===========================
 
 Install the package `icemac.install.addressbook` using pip::
 
