@@ -1,5 +1,5 @@
-from install import download_url, extract_archive_from, install, CURRENT_NAME
-from install import symlink, main
+from . import CURRENT_NAME
+from install import download_url, extract_archive_from, install, symlink, main
 import contextlib
 import io
 import mock

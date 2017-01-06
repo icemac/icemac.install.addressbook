@@ -1,5 +1,6 @@
 from __future__ import absolute_import
 
+from . import CURRENT_NAME
 from .cmd import call_cmd
 import archive
 import argparse
@@ -24,7 +25,6 @@ else:
 
 PYPI_JSON_URL = (
     'https://pypi.python.org/pypi/icemac.addressbook/json')
-CURRENT_NAME = 'current'
 
 
 def download_url(version):

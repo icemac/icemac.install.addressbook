@@ -1,4 +1,5 @@
 from .archive import main, archive, ARCHIVE_DIR_NAME
+from .install import symlink
 import mock
 import pytest
 
@@ -47,3 +48,12 @@ def test_archive__archive__3(address_book, archive_dir):
     assert ['archive'] == [x.basename for x in address_book.listdir()]
     assert ('icemac.addressbook-24.11 archived to '
             'archive/icemac.addressbook-24.11.tar.bz2' == result)
+
+
+def test_archive__archive__4(address_book, archive_dir):
+    """It refuses to archive the current version."""
+    symlink('icemac.addressbook-24.11')
+    with pytest.raises(AssertionError) as err:
+        archive('24.11')
+    assert ("'icemac.addressbook-24.11' is the current address book -- "
+            "cannot archive it!" == str(err.value))

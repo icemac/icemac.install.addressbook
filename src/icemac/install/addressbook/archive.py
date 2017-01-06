@@ -1,3 +1,4 @@
+from . import CURRENT_NAME
 import argparse
 import itertools
 import os.path
@@ -13,6 +14,10 @@ def archive(version):
     dirname = 'icemac.addressbook-{}'.format(version)
     if not os.path.exists(dirname):
         raise ValueError('Directory {!r} does not exist.'.format(dirname))
+    if os.path.realpath(CURRENT_NAME).endswith(dirname):
+        raise AssertionError(
+            '{!r} is the current address book -- cannot archive it!'.format(
+                dirname))
     if not os.path.exists(ARCHIVE_DIR_NAME):
         os.mkdir(ARCHIVE_DIR_NAME)
     supported_archive_formats = [x[0] for x in shutil.get_archive_formats()]
