@@ -60,6 +60,19 @@ def test_update__main__2(local_pypi):
         'icemac.addressbook-2.8.tar.gz')
 
 
+def test_update__main__2_5(basedir, capsys):
+    """It does not overwrite an existing installation."""
+    path = 'icemac.install.addressbook.install'
+    extract_archive_from(example_zip_url)
+    with mock.patch(path + '.download_url') as download_url,\
+            mock.patch(path + '.install') as install:
+        download_url.return_value = example_zip_url
+        main(['2.0.1'])
+    assert not install.called
+    assert ("'icemac.addressbook-2.0.1' already exists.\n",
+            '') == capsys.readouterr()
+
+
 def test_update__main__3():
     """It drops into pdb on an exception if required."""
     path = 'icemac.install.addressbook.install'
@@ -136,6 +149,14 @@ def test_update__extract_archive_from__2(basedir):
     extract_dir = extract_archive_from(example_tgz_url)
     assert 'icemac.addressbook-2.8' == extract_dir
     assert {'__init__.py', 'install.py'} == set(os.listdir(extract_dir))
+
+
+def test_update__extract_archive_from__3(basedir):
+    """It raises a RuntimeError if the extract dir already exists."""
+    extract_archive_from(example_tgz_url)
+    with pytest.raises(RuntimeError) as err:
+        extract_archive_from(example_tgz_url)
+    assert "'icemac.addressbook-2.8' already exists." == str(err.value)
 
 
 def test_update__install__1(basedir):

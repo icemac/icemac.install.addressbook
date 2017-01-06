@@ -57,10 +57,13 @@ def extract_archive_from(url):
     with tempfile.NamedTemporaryFile() as download_file:
         shutil.copyfileobj(r.raw, download_file)
         download_file.seek(0)
-        file = archive.Archive(download_file, r.url or url)
-        file.extract()
         try:
-            return file.namelist()[0].strip('/')
+            file = archive.Archive(download_file, r.url or url)
+            dir_name = file.namelist()[0].strip('/')
+            if os.path.exists(dir_name):
+                raise RuntimeError('{!r} already exists.'.format(dir_name))
+            file.extract()
+            return dir_name
         finally:
             del file  # make sure __del__ of file is called
 
@@ -101,7 +104,11 @@ def main(args=None):
     args = parser.parse_args(args)
     try:
         url = download_url(args.version)
-        dir_name = extract_archive_from(url)
+        try:
+            dir_name = extract_archive_from(url)
+        except RuntimeError as e:
+            print e
+            return
         install(dir_name)
         symlink(dir_name)
     except Exception:
