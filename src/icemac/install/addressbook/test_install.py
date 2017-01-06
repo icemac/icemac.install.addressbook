@@ -171,7 +171,7 @@ def test_update__install__1(basedir):
 
 def test_update__install__2(basedir):
     """It calls `install.py` with `current` if it exists in cwd."""
-    dir_name = str(basedir)
+    dir_name = str(basedir.mkdir('icemac.addressbook-2.0.2'))
     with mock.patch('icemac.install.addressbook.install.call_cmd') as call_cmd:
         install(dir_name)
         call_cmd.assert_called_with(sys.executable, 'install.py')

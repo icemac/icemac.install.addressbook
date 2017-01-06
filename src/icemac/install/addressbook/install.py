@@ -71,10 +71,10 @@ def extract_archive_from(url):
 def install(dir_name, stdin=None):
     """Run the address book installer in `dir_name`."""
     cwd = os.getcwd()
-    os.chdir(dir_name)
     args = [sys.executable, 'install.py']
     if os.path.exists(CURRENT_NAME):
         args.append(CURRENT_NAME)
+    os.chdir(dir_name)
     try:
         call_cmd(*args)
     finally:
