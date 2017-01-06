@@ -2,7 +2,7 @@
 Change log
 ==========
 
-1.0 (unreleased)
+1.0 (2017-01-06)
 ================
 
 * Initial release.
