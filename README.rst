@@ -12,7 +12,7 @@ Scripts to ease the installation and update an existing installation of
 Copyright
 =========
 
-Copyright (c) 2016 Michael Howitz
+Copyright (c) 2016-2017 Michael Howitz
 
 All Rights Reserved.
 
