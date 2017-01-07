@@ -59,7 +59,8 @@ The script executes the following steps:
    a previous `icemac.addressbook` installation it uses its
    configuration as default answers for the questions in the installation
    process.
-4. Create a new symlink named ``current`` pointing to the new installation.
+4. Create or replace the new symlink named ``current`` pointing to the new
+   installation.
 
 
 make-current-addressbook

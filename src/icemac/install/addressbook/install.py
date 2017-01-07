@@ -103,7 +103,7 @@ def make_current(args=None):
 
 
 def main(args=None):
-    """Entry point for `bin/update-addressbook`."""
+    """Entry point for `bin/install-addressbook`."""
     parser = argparse.ArgumentParser(
         description='Update the address book to a new version.')
     parser.add_argument(
