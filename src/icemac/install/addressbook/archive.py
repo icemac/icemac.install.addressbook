@@ -1,4 +1,4 @@
-from . import CURRENT_NAME
+from . import CURRENT_NAME, DIRNAME_TEMPLATE
 import argparse
 import itertools
 import os.path
@@ -8,10 +8,18 @@ ARCHIVE_DIR_NAME = 'archive'
 # Formats sorted by priority
 DESIRED_ARCHIVE_FORMATS = ('xztar', 'bztar', 'gztar', 'zip', 'tar')
 
+# *Sigh* Python 2.7 does not do this check itself. (Python 3 does!)
+try:
+    import bz2
+except ImportError:  # pragma: nocover
+    shutil.unregister_archive_format('bztar')
+else:
+    del bz2
+
 
 def archive(version):
     """Archive a directory named `icemac.addressbook-<version>`."""
-    dirname = 'icemac.addressbook-{}'.format(version)
+    dirname = DIRNAME_TEMPLATE.format(version)
     if not os.path.exists(dirname):
         raise ValueError('Directory {!r} does not exist.'.format(dirname))
     if os.path.realpath(CURRENT_NAME).endswith(dirname):

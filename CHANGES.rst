@@ -5,7 +5,8 @@ Change log
 1.2 (unreleased)
 ================
 
-- Nothing changed yet.
+- Prevent an error in `archive-addressbook` if the ``bz2`` module is not
+  available.
 
 
 1.1 (2017-01-07)
