@@ -62,6 +62,25 @@ The script executes the following steps:
 4. Create a new symlink named ``current`` pointing to the new installation.
 
 
+make-current-addressbook
+------------------------
+
+This script is helpful if you want to switch back to an older installed address
+book version in case of an error.
+
+Start the script using::
+
+    $ bin/make-current-addressbook VERSION_NUMBER
+
+Where ``VERSION_NUMBER`` is the number of the version you want to make the
+current one.
+
+The script executes the following steps:
+
+1. Create or replace the new symlink named ``current`` pointing to the new
+   installation.
+
+
 archive-addressbook
 -------------------
 

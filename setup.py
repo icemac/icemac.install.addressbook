@@ -23,6 +23,7 @@ setup(
     entry_points={
         'console_scripts': [
             'install-addressbook = icemac.install.addressbook.install:main',
+            'make-current-addressbook = icemac.install.addressbook.install:make_current',  # noqa
             'archive-addressbook = icemac.install.addressbook.archive:main',
         ],
     },

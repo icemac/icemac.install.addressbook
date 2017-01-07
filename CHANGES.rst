@@ -5,7 +5,8 @@ Change log
 1.1 (unreleased)
 ================
 
-- Nothing changed yet.
+- Add ``make-current-addressbook`` script to ease usage of the `current`
+  symlink in case of an error.
 
 
 1.0 (2017-01-06)
