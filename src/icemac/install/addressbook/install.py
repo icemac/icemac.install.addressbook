@@ -27,8 +27,11 @@ PYPI_JSON_URL = (
     'https://pypi.python.org/pypi/icemac.addressbook/json')
 
 
-def download_url(version):
-    """Get the download_url."""
+def download_url_and_version(version):
+    """Get the download_url and the version.
+
+    If `version` is `None` use the newest version.
+    """
     r = requests_session.get(PYPI_JSON_URL)
     r.raise_for_status()
     data = r.json()
@@ -41,7 +44,7 @@ def download_url(version):
         raise ValueError('Release {!r} does not exist.'.format(version))
     for package in packages:
         if package['packagetype'] == 'sdist':
-            return package['url']
+            return package['url'], version
     raise ValueError(
         'Release {!r} does not have an sdist release.'.format(version))
 
@@ -117,8 +120,10 @@ def main(args=None):
 
     args = parser.parse_args(args)
     try:
-        url = download_url(args.version)
+        url, version = download_url_and_version(args.version)
         try:
+            print 'Downloading version {} of icemac.addressbook ...'.format(
+                version)
             dir_name = extract_archive_from(url)
         except RuntimeError as e:
             print e

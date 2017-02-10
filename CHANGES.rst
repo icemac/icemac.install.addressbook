@@ -5,7 +5,7 @@ Change log
 1.2 (unreleased)
 ================
 
-- Nothing changed yet.
+- `install-addressbook` now prints a message before starting the download.
 
 
 1.1.1 (2017-01-07)

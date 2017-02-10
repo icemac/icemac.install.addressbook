@@ -1,5 +1,6 @@
 from . import CURRENT_NAME
-from install import download_url, extract_archive_from, install, symlink, main
+from install import download_url_and_version, extract_archive_from, install
+from install import symlink, main
 from install import make_current
 import contextlib
 import io
@@ -48,7 +49,7 @@ def test_update__main__1(local_pypi):
     symlink.assert_called_with('icemac.addressbook-2.6.2')
 
 
-def test_update__main__2(local_pypi):
+def test_update__main__2(local_pypi, capsys):
     """It defaults to the newest version."""
     path = 'icemac.install.addressbook.install'
     with mock.patch(path + '.extract_archive_from') as extract_archive_from,\
@@ -59,25 +60,33 @@ def test_update__main__2(local_pypi):
         'https://pypi.python.org/packages/f9/e6/'
         '3b40e95936e32fa3d46cc5807785217c6444c086e669ccffffe0a2dff6ee/'
         'icemac.addressbook-2.8.tar.gz')
+    out, err = capsys.readouterr()
+    assert [
+        u"Downloading version 2.8 of icemac.addressbook ...",
+        u""] == out.split("\n")
 
 
 def test_update__main__2_5(basedir, capsys):
     """It does not overwrite an existing installation."""
     path = 'icemac.install.addressbook.install'
     extract_archive_from(example_zip_url)
-    with mock.patch(path + '.download_url') as download_url,\
+    with mock.patch(path + '.download_url_and_version') as dl_url_and_version,\
             mock.patch(path + '.install') as install:
-        download_url.return_value = example_zip_url
+        dl_url_and_version.return_value = example_zip_url, '2.0.1'
         main(['2.0.1'])
     assert not install.called
-    assert ("'icemac.addressbook-2.0.1' already exists.\n",
-            '') == capsys.readouterr()
+    out, err = capsys.readouterr()
+    assert [
+        u"Downloading version 2.0.1 of icemac.addressbook ...",
+        u"'icemac.addressbook-2.0.1' already exists.",
+        u""] == out.split("\n")
 
 
 def test_update__main__3():
     """It drops into pdb on an exception if required."""
     path = 'icemac.install.addressbook.install'
-    with mock.patch(path + '.download_url', side_effect=RuntimeError),\
+    with mock.patch(path + '.download_url_and_version',
+                    side_effect=RuntimeError),\
             mock.patch('pdb.post_mortem') as post_mortem:
         main(['--debug'])
     post_mortem.assert_called_with()
@@ -86,7 +95,8 @@ def test_update__main__3():
 def test_update__main__4():
     """It it raises the exception if debugger is not required."""
     path = 'icemac.install.addressbook.install'
-    with mock.patch(path + '.download_url', side_effect=RuntimeError),\
+    with mock.patch(path + '.download_url_and_version',
+                    side_effect=RuntimeError),\
             pytest.raises(RuntimeError):
         main([])
 
@@ -105,37 +115,39 @@ def user_input(input, stdin):
     yield
 
 
-def test_update__download_url__1(local_pypi):
+def test_update__download_url_and_version__1(local_pypi):
     """It returns the URL to download the specified address book version."""
-    assert (
+    assert ((
         'https://pypi.python.org/packages/dd/01/'
         '36f28ce3db10431ec21245233e6562fc609d8301003b981b28fb3aedcf67/'
-        'icemac.addressbook-1.10.5.zip' == download_url('1.10.5'))
+        'icemac.addressbook-1.10.5.zip', '1.10.5') ==
+        download_url_and_version('1.10.5'))
 
 
-def test_update__download_url__2(local_pypi):
+def test_update__download_url_and_version__2(local_pypi):
     """It raises a ValueError if the specified version does not exist."""
     with pytest.raises(ValueError) as err:
-        download_url('24.11')
+        download_url_and_version('24.11')
     assert "Release '24.11' does not exist." == str(err.value)
 
 
-def test_update__download_url__3(local_pypi):
+def test_update__download_url_and_version__3(local_pypi):
     """It raises a ValueError if the specified version has not sdist."""
     with pytest.raises(ValueError) as err:
-        download_url('1.1.1')
+        download_url_and_version('1.1.1')
     assert "Release '1.1.1' does not have an sdist release." == str(err.value)
 
 
-def test_update__download_url__4(local_pypi):
+def test_update__download_url_and_version__4(local_pypi):
     """It returns the URL of the newest address book version if ...
 
     called with `None` as version.
     """
-    assert (
+    assert ((
         'https://pypi.python.org/packages/f9/e6/'
         '3b40e95936e32fa3d46cc5807785217c6444c086e669ccffffe0a2dff6ee/'
-        'icemac.addressbook-2.8.tar.gz' == download_url(None))
+        'icemac.addressbook-2.8.tar.gz', '2.8') ==
+        download_url_and_version(None))
 
 
 def test_update__extract_archive_from__1(basedir):
