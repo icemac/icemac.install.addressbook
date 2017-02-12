@@ -1,3 +1,4 @@
+from __future__ import print_function
 from . import CURRENT_NAME, DIRNAME_TEMPLATE
 import argparse
 import itertools
@@ -17,8 +18,8 @@ else:
     del bz2
 
 
-def archive(version):
-    """Archive a directory named `icemac.addressbook-<version>`."""
+def prepare_archive(version):
+    """Prepare archiving a directory named `icemac.addressbook-<version>`."""
     dirname = DIRNAME_TEMPLATE.format(version)
     if not os.path.exists(dirname):
         raise ValueError('Directory {!r} does not exist.'.format(dirname))
@@ -31,10 +32,15 @@ def archive(version):
     supported_archive_formats = [x[0] for x in shutil.get_archive_formats()]
     format = next(itertools.ifilter(lambda x: x in supported_archive_formats,
                                     DESIRED_ARCHIVE_FORMATS))
+    return dirname, format
+
+
+def archive(dirname, format):
+    """Execute archiving `dirname` as `format`."""
     archive = shutil.make_archive(dirname, format, base_dir=dirname)
     shutil.move(archive, ARCHIVE_DIR_NAME)
     shutil.rmtree(dirname)
-    return "{dirname} archived to {dir}/{target}".format(
+    return "Done archiving to {dir}/{target}.".format(
         dirname=dirname, dir=ARCHIVE_DIR_NAME, target=archive)
 
 
@@ -48,4 +54,6 @@ def main(args=None):
 
     args = parser.parse_args(args)
 
-    print archive(args.version)
+    dirname, format = prepare_archive(args.version)
+    print("Archiving {} ...".format(dirname))
+    print(archive(dirname, format))

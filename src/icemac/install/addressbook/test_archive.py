@@ -1,6 +1,5 @@
-from .archive import main, archive, ARCHIVE_DIR_NAME
+from .archive import main, prepare_archive, archive, ARCHIVE_DIR_NAME
 from .install import symlink
-import mock
 import pytest
 
 
@@ -18,42 +17,51 @@ def archive_dir(basedir):
     basedir.mkdir(ARCHIVE_DIR_NAME)
 
 
-def test_archive__main__1():
-    """It calls `archive` with the requested version number."""
-    with mock.patch('icemac.install.addressbook.archive.archive') as archive:
-        main(['4.3'])
-    archive.assert_called_with('4.3')
+def test_archive__main__1(address_book, capsys):
+    """It archives the specified address book version."""
+    main(['24.11'])
+    out, err = capsys.readouterr()
+    assert [
+        'Archiving icemac.addressbook-24.11 ...',
+        'Done archiving to archive/icemac.addressbook-24.11.tar.bz2.',
+    ] == out.splitlines()
+    assert '' == err
 
 
-def test_archive__archive__1():
+def test_archive__prepare_archive__1():
     """It raises a ValueError if the file does not exist."""
     with pytest.raises(ValueError) as err:
-        archive('24.11')
+        prepare_archive('24.11')
     assert ("Directory 'icemac.addressbook-24.11' does not exist." ==
             str(err.value))
 
 
-def test_archive__archive__2(address_book):
+def test_archive__prepare_archive__2(address_book):
     """It creates the archive directory if it does not exist."""
-    archive('24.11')
+    prepare_archive('24.11')
     assert 'archive' in [x.basename for x in address_book.listdir()]
 
 
-def test_archive__archive__3(address_book, archive_dir):
+def test_archive__prepare_archive__3(address_book, archive_dir):
+    """It returns the file name to be archived and the format."""
+    assert ('icemac.addressbook-24.11', 'bztar') == prepare_archive('24.11')
+
+
+def test_archive__prepare_archive__4(address_book, archive_dir):
+    """It refuses to archive the current version."""
+    symlink('icemac.addressbook-24.11')
+    with pytest.raises(AssertionError) as err:
+        prepare_archive('24.11')
+    assert ("'icemac.addressbook-24.11' is the current address book -- "
+            "cannot archive it!" == str(err.value))
+
+
+def test_archive__archive__1(address_book, archive_dir):
     """It archives the address book and deletes it."""
-    result = archive('24.11')
+    result = archive('icemac.addressbook-24.11', 'bztar')
     assert (
         ['icemac.addressbook-24.11.tar.bz2'] ==
         [x.basename for x in address_book.join(ARCHIVE_DIR_NAME).listdir()])
     assert ['archive'] == [x.basename for x in address_book.listdir()]
-    assert ('icemac.addressbook-24.11 archived to '
-            'archive/icemac.addressbook-24.11.tar.bz2' == result)
-
-
-def test_archive__archive__4(address_book, archive_dir):
-    """It refuses to archive the current version."""
-    symlink('icemac.addressbook-24.11')
-    with pytest.raises(AssertionError) as err:
-        archive('24.11')
-    assert ("'icemac.addressbook-24.11' is the current address book -- "
-            "cannot archive it!" == str(err.value))
+    assert ('Done archiving to archive/icemac.addressbook-24.11.tar.bz2.' ==
+            result)

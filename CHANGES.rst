@@ -7,6 +7,7 @@ Change log
 
 - `install-addressbook` now prints a message before starting the download.
 
+- `archive-addressbook` now prints a message before starting archiving.
 
 1.1.1 (2017-01-07)
 ==================
