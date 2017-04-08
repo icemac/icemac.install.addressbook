@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='icemac.install.addressbook',
-    version='1.2',
+    version='1.3.dev0',
 
     install_requires=[
         'requests',
