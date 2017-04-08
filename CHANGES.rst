@@ -2,7 +2,7 @@
 Change log
 ==========
 
-1.2 (unreleased)
+1.2 (2017-04-08)
 ================
 
 - `install-addressbook` now prints a message before starting the download.
