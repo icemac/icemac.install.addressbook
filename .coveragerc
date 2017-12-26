@@ -1,9 +1,0 @@
-[run]
-branch = True
-source = icemac.install.addressbook
-
-[report]
-precision = 2
-
-[html]
-directory = coverage-report

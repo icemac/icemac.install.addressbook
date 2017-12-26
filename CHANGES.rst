@@ -5,7 +5,7 @@ Change log
 1.3 (unreleased)
 ================
 
-- Nothing changed yet.
+- Also release as wheel.
 
 
 1.2 (2017-04-08)
