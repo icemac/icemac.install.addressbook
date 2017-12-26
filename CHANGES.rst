@@ -2,8 +2,8 @@
 Change log
 ==========
 
-1.3 (unreleased)
-================
+1.2.post1 (2017-12-26)
+======================
 
 - Also release as wheel.
 
