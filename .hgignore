@@ -9,12 +9,13 @@ syntax: glob
 .coverage.*
 .installed.cfg
 .mr.developer.cfg
+.pytest_cache
 bin
 build
 coverage-report/
 coverage.xml
 develop-eggs
 eggs
+htmlcov/
 parts
 test-report/
-htmlcov/
