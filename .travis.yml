@@ -3,7 +3,8 @@ sudo: required
 python:
   - "2.7"
 before_install:
-  - pip uninstall -y pytest attrs
+  - pip freeze
+  - pip uninstall -y pytest pluggy attrs
 install:
   - python bootstrap.py
   - bin/buildout -n
