@@ -35,20 +35,16 @@ setup(
 
     keywords='icemac addressbook install update archive manage',
     classifiers="""\
-Development Status :: 4 - Beta
+Development Status :: 5 - Production/Stable
 Environment :: Console
 Intended Audience :: System Administrators
-License :: OSI Approved
 License :: OSI Approved :: MIT License
 Natural Language :: English
 Operating System :: OS Independent
-Programming Language :: Python
 Programming Language :: Python :: 2
 Programming Language :: Python :: 2.7
 Programming Language :: Python :: 2 :: Only
-Programming Language :: Python :: Implementation
 Programming Language :: Python :: Implementation :: CPython
-Topic :: System
 Topic :: System :: Archiving
 Topic :: System :: Installation/Setup
 """[:-1].split('\n'),
