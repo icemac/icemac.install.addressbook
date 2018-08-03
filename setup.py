@@ -30,7 +30,7 @@ setup(
 
     author='Michael Howitz',
     author_email='icemac@gmx.net',
-    license='ZPL 2.1',
+    license='MIT',
     url='https://github.com/icemac/icemac.install.addressbook',
 
     keywords='icemac addressbook install update archive manage',
@@ -39,7 +39,7 @@ Development Status :: 4 - Beta
 Environment :: Console
 Intended Audience :: System Administrators
 License :: OSI Approved
-License :: OSI Approved :: Zope Public License
+License :: OSI Approved :: MIT License
 Natural Language :: English
 Operating System :: OS Independent
 Programming Language :: Python
