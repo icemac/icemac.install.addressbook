@@ -52,7 +52,6 @@ Topic :: System :: Installation/Setup
     description=__doc__.strip(),
     long_description='\n\n'.join(open(name).read() for name in (
         'README.rst',
-        'COPYRIGHT.txt',
         'CHANGES.rst',
     )),
     packages=find_packages('src'),
