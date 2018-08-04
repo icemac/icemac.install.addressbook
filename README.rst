@@ -94,3 +94,17 @@ The script executes the following steps:
    a directory named ``archive``. (The ``archive`` directory is created if it
    not yet exists.)
 2. Delete the requested `icemac.addressbook` installation.
+
+Hacking
+=======
+
+* Clone the repository::
+
+  $ git clone https://github.com/icemac/icemac.install.addressbook
+
+* Create a virtualenv, install the installer and run it::
+
+  $ cd icemac.install.addressbook
+  $ virtualenv-2.7 .
+  $ bin/pip install zc.buildout
+  $ bin/buildout -n

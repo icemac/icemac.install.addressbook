@@ -4,6 +4,7 @@ syntax: glob
 *.pyc
 *.pyo
 .DS_Store
+.Python
 .cache
 .coverage
 .coverage.*
@@ -17,5 +18,8 @@ coverage.xml
 develop-eggs
 eggs
 htmlcov/
+include/
+lib/
 parts
+pip-selfcheck.json
 test-report/

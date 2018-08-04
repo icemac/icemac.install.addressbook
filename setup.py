@@ -8,8 +8,9 @@ setup(
     version='1.4.dev0',
 
     install_requires=[
-        'requests',
         'archive',
+        'requests',
+        'zc.buildout',  # Its scripts are needed to install the address book.
     ],
 
     extras_require={

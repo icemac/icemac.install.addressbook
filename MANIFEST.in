@@ -1,11 +1,9 @@
-include *.py
 include *.rst
 include *.txt
 include .coveragerc
 include buildout.cfg
 include pytest.ini
 
-exclude bootstrap.py
 exclude buildout.cfg
 exclude MANIFEST.in
 exclude pytest.ini
