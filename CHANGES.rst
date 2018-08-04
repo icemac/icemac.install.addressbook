@@ -2,8 +2,8 @@
 Change log
 ==========
 
-1.4 (unreleased)
-================
+1.3.1 (2018-08-04)
+==================
 
 - Use virtualenv instead of `bootstrap.py` of `zc.buildout`.
 
