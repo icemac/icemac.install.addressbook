@@ -6,7 +6,7 @@ before_install:
   - pip freeze
   - pip uninstall -y pytest pluggy attrs
 install:
-  - python bootstrap.py
-  - bin/buildout -n
+  - pip install zc.buildout
+  - buildout -n
 script:
   - bin/py.test
