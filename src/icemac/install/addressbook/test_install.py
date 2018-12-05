@@ -1,7 +1,9 @@
+from __future__ import absolute_import
+
 from . import CURRENT_NAME
-from install import download_url_and_version, extract_archive_from, install
-from install import symlink, main
-from install import make_current
+from .install import download_url_and_version, extract_archive_from, install
+from .install import make_current
+from .install import symlink, main
 import contextlib
 import io
 import mock
