@@ -122,11 +122,11 @@ def main(args=None):
     try:
         url, version = download_url_and_version(args.version)
         try:
-            print 'Downloading version {} of icemac.addressbook ...'.format(
-                version)
+            print('Downloading version {} of icemac.addressbook ...'.format(
+                version))
             dir_name = extract_archive_from(url)
         except RuntimeError as e:
-            print e
+            print(e)
             return
         install(dir_name)
         symlink(dir_name)
