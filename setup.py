@@ -10,6 +10,7 @@ setup(
     install_requires=[
         'archive',
         'requests',
+        'z3c.recipe.usercrontab',
         'zc.buildout',  # Its scripts are needed to install the address book.
     ],
 
