@@ -1,7 +1,7 @@
 from __future__ import absolute_import
 
-from . import CURRENT_NAME, DIRNAME_TEMPLATE
-from .cmd import call_cmd
+from .. import CURRENT_NAME, DIRNAME_TEMPLATE
+from ..cmd import call_cmd
 import archive
 import argparse
 import os

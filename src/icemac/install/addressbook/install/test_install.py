@@ -1,6 +1,6 @@
 from __future__ import absolute_import
 
-from . import CURRENT_NAME
+from .. import CURRENT_NAME
 from .install import download_url_and_version, extract_archive_from, install
 from .install import make_current
 from .install import remove_cronjobs
@@ -32,7 +32,7 @@ def local_pypi():
     url = pathlib.Path(pkg_resources.resource_filename(
         'icemac.install.addressbook',
         'fixtures/icemac.addressbook.json')).as_uri()
-    with mock.patch('icemac.install.addressbook.install.PYPI_JSON_URL',
+    with mock.patch('icemac.install.addressbook.install.install.PYPI_JSON_URL',
                     new=url):
         yield
 
@@ -60,7 +60,7 @@ def crontab_file(tmpdir):
 
 def test_update__main__1(local_pypi):
     """It calls some functions with appropriate parameters."""
-    path = 'icemac.install.addressbook.install'
+    path = 'icemac.install.addressbook.install.install'
     with mock.patch(path + '.extract_archive_from') as extract_archive_from,\
             mock.patch(path + '.install') as install,\
             mock.patch(path + '.symlink') as symlink:
@@ -76,7 +76,7 @@ def test_update__main__1(local_pypi):
 
 def test_update__main__2(local_pypi, capsys):
     """It defaults to the newest version."""
-    path = 'icemac.install.addressbook.install'
+    path = 'icemac.install.addressbook.install.install'
     with mock.patch(path + '.extract_archive_from') as extract_archive_from,\
             mock.patch(path + '.install'),\
             mock.patch(path + '.symlink'):
@@ -93,7 +93,7 @@ def test_update__main__2(local_pypi, capsys):
 
 def test_update__main__2_5(basedir, capsys):
     """It does not overwrite an existing installation."""
-    path = 'icemac.install.addressbook.install'
+    path = 'icemac.install.addressbook.install.install'
     extract_archive_from(example_zip_url)
     with mock.patch(path + '.download_url_and_version') as dl_url_and_version,\
             mock.patch(path + '.install') as install:
@@ -109,7 +109,7 @@ def test_update__main__2_5(basedir, capsys):
 
 def test_update__main__3():
     """It drops into pdb on an exception if required."""
-    path = 'icemac.install.addressbook.install'
+    path = 'icemac.install.addressbook.install.install'
     with mock.patch(path + '.download_url_and_version',
                     side_effect=RuntimeError),\
             mock.patch('pdb.post_mortem') as post_mortem:
@@ -119,7 +119,7 @@ def test_update__main__3():
 
 def test_update__main__4():
     """It it raises the exception if debugger is not required."""
-    path = 'icemac.install.addressbook.install'
+    path = 'icemac.install.addressbook.install.install'
     with mock.patch(path + '.download_url_and_version',
                     side_effect=RuntimeError),\
             pytest.raises(RuntimeError):
@@ -210,7 +210,8 @@ def test_update__install__1(basedir):
 def test_update__install__2(basedir):
     """It calls `install.py` with `current` if it exists in cwd."""
     dir_name = str(basedir.mkdir('icemac.addressbook-2.0.2'))
-    with mock.patch('icemac.install.addressbook.install.call_cmd') as call_cmd:
+    call_cmd = 'icemac.install.addressbook.install.install.call_cmd'
+    with mock.patch(call_cmd) as call_cmd:
         install(dir_name)
         call_cmd.assert_called_with(sys.executable, 'install.py')
 

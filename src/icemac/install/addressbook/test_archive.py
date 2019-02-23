@@ -1,5 +1,5 @@
 from .archive import main, prepare_archive, archive, ARCHIVE_DIR_NAME
-from .install import symlink
+from .install.install import symlink
 import pytest
 
 
