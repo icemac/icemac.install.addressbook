@@ -11,7 +11,7 @@ setup(
         'archive',
         'requests',
         'z3c.recipe.usercrontab',
-        'zc.buildout',  # Its scripts are needed to install the address book.
+        'zc.buildout',  # `bin/buildout` is needed to install the address book.
     ],
 
     extras_require={
