@@ -2,7 +2,6 @@ from __future__ import absolute_import
 
 from .. import CURRENT_NAME
 from .install import download_url_and_version, extract_archive_from, install
-from .install import make_current
 from .install import remove_cronjobs
 from .install import symlink, main
 import contextlib
@@ -236,17 +235,6 @@ def test_update__symlink__2(basedir):
     basedir.mkdir('icemac.addressbook-2.1.3')
     symlink('icemac.addressbook-2.1.2')
     symlink('icemac.addressbook-2.1.3')
-    assert os.path.islink(CURRENT_NAME)
-    assert os.path.exists(CURRENT_NAME)  # assert the link is not broken
-    assert os.path.realpath(CURRENT_NAME).endswith('icemac.addressbook-2.1.3')
-
-
-def test_update__make_current__1(basedir):
-    """It updates the `current` symlink to the given address book version."""
-    basedir.mkdir('icemac.addressbook-2.1.2')
-    basedir.mkdir('icemac.addressbook-2.1.3')
-    symlink('2.1.2')
-    make_current(['2.1.3'])
     assert os.path.islink(CURRENT_NAME)
     assert os.path.exists(CURRENT_NAME)  # assert the link is not broken
     assert os.path.realpath(CURRENT_NAME).endswith('icemac.addressbook-2.1.3')
