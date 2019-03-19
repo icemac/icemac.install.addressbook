@@ -3,8 +3,11 @@ from __future__ import absolute_import
 from .. import CURRENT_NAME
 from ..utils import symlink
 from ..cmd import call_cmd
+from .config import Configurator
+from .config import USER_INI
 import archive
 import argparse
+import configparser
 import os
 import os.path
 import pathlib
@@ -65,9 +68,10 @@ def extract_archive_from(url):
         download_file.seek(0)
         try:
             file = archive.Archive(download_file, r.url or url)
-            dir_name = file.namelist()[0].strip('/')
-            if os.path.exists(dir_name):
-                raise RuntimeError('{!r} already exists.'.format(dir_name))
+            dir_name = pathlib.Path(file.namelist()[0].strip('/'))
+            if dir_name.exists():
+                raise RuntimeError('{!r} already exists.'.format(
+                    str(dir_name)))
             file.extract()
             return dir_name
         finally:
@@ -98,18 +102,123 @@ def remove_cronjobs(path, readcrontab=None, writecrontab=None):
             manager.write_crontab()
 
 
+def not_matched_prerequisites(path):
+    """Check whether icemac.addressbook can be installed."""
+    if (path / 'buildout.cfg').exists():
+        return (
+            "ERROR: buildout.cfg already exists.\n"
+            "       Please (re-)move the existing one and restart install.")
+    if sys.version_info[:2] != (2, 7):
+        return ("ERROR: icemac.addressbook currently supports only Python 2.7."
+                "\n       But you try to install it using Python %s.%s.%s." % (
+                    sys.version_info[:3]))
+    return False
+
+
 def install(dir_name, stdin=None):
     """Run the address book installer in `dir_name`."""
+    msg = not_matched_prerequisites(dir_name)
+    if msg:
+        print(msg)
+        sys.exit(-1)
     cwd = os.getcwd()
-    args = [sys.executable, 'install.py']
-    if os.path.exists(CURRENT_NAME):
-        args.append(os.path.join(os.pardir, CURRENT_NAME))
-        remove_cronjobs(CURRENT_NAME)
-    os.chdir(dir_name)
+
+    os.chdir(str(dir_name))  # Python 2: in Py3 `str` is no longer needed
     try:
-        call_cmd(*args)
+        conf_args = []
+        curr_path = dir_name / CURRENT_NAME
+        if curr_path.exists():
+            conf_args.append(curr_path / USER_INI)
+            remove_cronjobs(CURRENT_NAME)
+
+        if Configurator(*conf_args, stdin=stdin)():
+            call_cmd('running bin/buildout', '../bin/buildout')
+            migrate()
     finally:
         os.chdir(cwd)
+    print('Installation complete.')
+
+
+def migration_bool_get(config, key, default=None):
+    """Read value from "migration" section of the config."""
+    try:
+        value = config.get('migration', key)
+    except (configparser.NoOptionError,
+            configparser.NoSectionError):
+        assert default is not None
+        return default
+    return value == 'yes'
+
+
+def copy_dir(src_base, dest_base, *path_parts):
+    """Copy directory from src_base + path_parts to dest_base + path_parts."""
+    path = os.path.join(*path_parts)
+    src_dir = os.path.join(src_base, path)
+    dest_dir = os.path.join(dest_base, path)
+    if os.path.exists(dest_dir):
+        shutil.rmtree(dest_dir)
+    shutil.copytree(src_dir, dest_dir)
+
+
+def delete_dir_contents(*path_parts):
+    """Remove the contents of a directory, but keep the directory.
+
+    Currently it is deleted and recreated afterwards.
+    """
+    path = os.path.join(*path_parts)
+    shutil.rmtree(path)
+    os.mkdir(path)
+
+
+def migrate():
+    """Migrate an old address book instance."""
+    # Read the ini file the configurator just created to get the
+    # migration options.
+    config = configparser.SafeConfigParser()
+    config.read(USER_INI)
+
+    if not migration_bool_get(config, 'do_migration', default=False):
+        # no migration wanted
+        return False
+    old_instance = config.get('migration', 'old_instance', fallback='')
+    if not (old_instance and
+            os.path.exists(os.path.join(old_instance, USER_INI))):
+        print('ERROR: You did not provide a path to the old instance.')
+        print('       Or the path does not point to a previous instance.')
+        print('       So I can not migrate the existing content.')
+        sys.exit(-1)
+    cwd = os.getcwd()
+    try:
+        os.chdir(old_instance)
+        controller_path = os.path.join('bin', 'svctl')
+        shutdown_command = 'shutdown'
+        daemon_path = os.path.join('bin', 'svd')
+        if not os.path.exists(controller_path):
+            # Backwards compatibility up to version 7.x:
+            controller_path = os.path.join('bin', 'addressbook')
+            shutdown_command = 'stop'
+        if migration_bool_get(config, 'stop_server'):
+            call_cmd(
+                'Stopping old instance', controller_path, shutdown_command)
+        call_cmd('Creating backup of old instance',
+                 os.path.join('bin', 'snapshotbackup'))
+        print('Copying data backups to new instance ...')
+        copy_dir(os.curdir, cwd, 'var', 'snapshotbackups')
+        print('Copying blob backups to new instance ...')
+        copy_dir(os.curdir, cwd, 'var', 'blobstoragesnapshots')
+    finally:
+        os.chdir(cwd)
+
+    call_cmd('Restoring backup into new instance',
+             os.path.join('bin', 'snapshotrestore'), '--no-prompt')
+
+    # Backups are no longer needed after successful restore:
+    delete_dir_contents(cwd, 'var', 'blobstoragesnapshots')
+    delete_dir_contents(cwd, 'var', 'snapshotbackups')
+
+    if migration_bool_get(config, 'start_server'):
+        call_cmd('Starting new instance', daemon_path)
+    return True
 
 
 def main(args=None):

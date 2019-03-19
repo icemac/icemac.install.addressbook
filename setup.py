@@ -9,6 +9,8 @@ setup(
 
     install_requires=[
         'archive',
+        'configparser;python_version<"3"',
+        'pathlib',
         'requests',
         'z3c.recipe.usercrontab',
         'zc.buildout',  # `bin/buildout` is needed to install the address book.
@@ -17,7 +19,6 @@ setup(
     extras_require={
         'test': [
             'mock',
-            'pathlib',
             'requests-file',
         ],
     },
