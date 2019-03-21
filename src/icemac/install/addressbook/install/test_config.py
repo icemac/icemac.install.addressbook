@@ -1,6 +1,7 @@
 from ..testing import user_input
 from .config import Configurator
 from io import BytesIO
+from pathlib import Path
 import configparser
 import pytest
 import sys
@@ -151,7 +152,7 @@ def test_config__Configurator__load__1(config):
 
 def test_config__Configurator__load__2(config):
     """It raises an error if `user_config` points to a not existing file."""
-    config.user_config = 'i-do-not-exist.ini'
+    config.user_config = Path('i-do-not-exist.ini')
     with pytest.raises(IOError) as err:
         config.load()
     assert "'i-do-not-exist.ini' does not exist." == str(err.value)
@@ -162,7 +163,7 @@ def test_config__Configurator__load__3(config, basedir):
     assert 'py-eggs' == config.get('install', 'eggs_dir')
     user_ini = basedir.mkdir('prev_version').join('install.user.ini')
     user_ini.write("[install]\neggs_dir = my-eggs")
-    config.user_config = str(user_ini)
+    config.user_config = Path(str(user_ini))
     config.load()
     assert 'my-eggs' == config.get('install', 'eggs_dir')
     assert (str(basedir.join('prev_version')) ==
@@ -174,7 +175,7 @@ def test_config__Configurator__load__4(config, basedir):
     user_ini = basedir.mkdir('prev_version').join('install.user.ini')
     user_ini.write('')
 
-    config.user_config = str(user_ini)
+    config.user_config = Path(str(user_ini))
     config.load()
     assert '' != config.get('migration', 'old_instance')
 

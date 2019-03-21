@@ -1,7 +1,6 @@
 from __future__ import absolute_import, print_function
 import collections
 import configparser
-import os.path
 import sys
 
 
@@ -12,8 +11,8 @@ USER_INI = "install.user.ini"
 class Configurator(object):
     """Configure installation.
 
-    user_config ... path to config file with previously entered user values
-                    which take precedence over application defaults.
+    user_config ... pathlib.Path to config file with previously entered user
+                    values which take precedence over application defaults.
                     Might be None, so no user values are used.
     """
 
@@ -96,21 +95,20 @@ class Configurator(object):
         read when `user_config` is set on instance.
 
         """
-        if (self.user_config is not None and
-                not os.path.exists(self.user_config)):
-            raise IOError('%r does not exist.' % self.user_config)
+        if (self.user_config is not None and not self.user_config.exists()):
+            raise IOError("'%s' does not exist." % self.user_config)
 
         to_read = ['install.default.ini']
         if self.user_config is not None:
-            to_read.append(self.user_config)
+            to_read.append(str(self.user_config))  # PY2: Remove str later on 3
 
         # create config
         self._conf = configparser.SafeConfigParser(
             dict_type=collections.OrderedDict)
         self._conf.read(to_read)
         if self.user_config is not None:
-            self._conf.set('migration', 'old_instance',
-                           os.path.dirname(self.user_config))
+            self._conf.set(
+                'migration', 'old_instance', str(self.user_config.parent))
         else:
             self._conf.set('migration', 'old_instance', '')
 

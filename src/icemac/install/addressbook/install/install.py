@@ -116,26 +116,25 @@ def not_matched_prerequisites(path):
 
 
 def install(dir_name, stdin=None):
-    """Run the address book installer in `dir_name`."""
+    """Configure the address book extracted to `dir_name`."""
     msg = not_matched_prerequisites(dir_name)
     if msg:
         print(msg)
         sys.exit(-1)
-    cwd = os.getcwd()
+    cwd = pathlib.Path.cwd()
+    conf_args = []
+    curr_path = cwd / CURRENT_NAME
+    if curr_path.exists():
+        conf_args.append(curr_path / USER_INI)
+        remove_cronjobs(CURRENT_NAME)
 
-    os.chdir(str(dir_name))  # Python 2: in Py3 `str` is no longer needed
+    os.chdir(str(dir_name))  # PY2: in PY3 `str` is no longer needed
     try:
-        conf_args = []
-        curr_path = dir_name / CURRENT_NAME
-        if curr_path.exists():
-            conf_args.append(curr_path / USER_INI)
-            remove_cronjobs(CURRENT_NAME)
-
         if Configurator(*conf_args, stdin=stdin)():
             call_cmd('running bin/buildout', '../bin/buildout')
             migrate()
     finally:
-        os.chdir(cwd)
+        os.chdir(str(cwd))  # PY2: in PY3 `str` is no longer needed
     print('Installation complete.')
 
 

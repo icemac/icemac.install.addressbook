@@ -8,22 +8,22 @@ from .install import main
 from .install import migrate
 from .install import not_matched_prerequisites
 from .install import remove_cronjobs
+from pathlib import Path
 import icemac.install.addressbook.testing
 import io
 import mock
 import os.path
-import pathlib
 import pkg_resources
 import pytest
 import textwrap
 
 
-example_zip_url = pathlib.Path(pkg_resources.resource_filename(
+example_zip_url = Path(pkg_resources.resource_filename(
     'icemac.install.addressbook',
     'fixtures/icemac.addressbook-8.0.1.zip')).as_uri()
 
 
-example_tgz_url = pathlib.Path(pkg_resources.resource_filename(
+example_tgz_url = Path(pkg_resources.resource_filename(
     'icemac.install.addressbook',
     'fixtures/icemac.addressbook-2.8.tar.gz')).as_uri()
 
@@ -31,7 +31,7 @@ example_tgz_url = pathlib.Path(pkg_resources.resource_filename(
 @pytest.fixture('function')
 def local_pypi():
     """Patch the call to PyPI to a file URL."""
-    url = pathlib.Path(pkg_resources.resource_filename(
+    url = Path(pkg_resources.resource_filename(
         'icemac.install.addressbook',
         'fixtures/icemac.addressbook.json')).as_uri()
     with mock.patch('icemac.install.addressbook.install.install.PYPI_JSON_URL',
@@ -241,19 +241,18 @@ def test_install__install__1(basedir):
 
 def test_install__install__2(basedir):
     """It calls `install.py` with `current` if it exists in cwd."""
-    dir_name = basedir.mkdir('icemac.addressbook')
+    dir_path = Path(str(basedir.mkdir('icemac.addressbook-5.5.7')))
     Configurator = 'icemac.install.addressbook.install.install.Configurator'
     with mock.patch(Configurator) as Configurator:
         Configurator().return_value = False
-        install(dir_name)
+        install(dir_path)
         Configurator.assert_called_with(stdin=None)
 
         Configurator.reset_mock()
         Configurator().return_value = False
-        dir_name.mkdir(CURRENT_NAME)
-        install(dir_name)
-        Configurator.assert_called_with(
-            dir_name.join(CURRENT_NAME, USER_INI), stdin=None)
+        current_path = Path(str(basedir.mkdir(CURRENT_NAME)))
+        install(dir_path)
+        Configurator.assert_called_with(current_path / USER_INI, stdin=None)
 
 
 def test_install__install__3(basedir, monkeypatch):
