@@ -173,7 +173,7 @@ def migrate():
     """Migrate an old address book instance."""
     # Read the ini file the configurator just created to get the
     # migration options.
-    config = configparser.SafeConfigParser()
+    config = configparser.ConfigParser()
     config.read(USER_INI)
 
     if not migration_bool_get(config, 'do_migration', default=False):

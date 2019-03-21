@@ -1,5 +1,4 @@
 from __future__ import absolute_import, print_function
-import collections
 import configparser
 import sys
 
@@ -103,8 +102,7 @@ class Configurator(object):
             to_read.append(str(self.user_config))  # PY2: Remove str later on 3
 
         # create config
-        self._conf = configparser.SafeConfigParser(
-            dict_type=collections.OrderedDict)
+        self._conf = configparser.ConfigParser()
         self._conf.read(to_read)
         if self.user_config is not None:
             self._conf.set(
@@ -248,8 +246,7 @@ class Configurator(object):
 
     def create_buildout_cfg(self):
         print('creating buildout.cfg ...')
-        buildout_cfg = configparser.SafeConfigParser(
-            dict_type=collections.OrderedDict)
+        buildout_cfg = configparser.ConfigParser()
         buildout_cfg.add_section('buildout')
         buildout_cfg.set('buildout', 'extends', 'profiles/prod.cfg')
         buildout_cfg.set('buildout', 'newest', 'true')
