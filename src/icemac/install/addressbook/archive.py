@@ -12,7 +12,7 @@ DESIRED_ARCHIVE_FORMATS = ('xztar', 'bztar', 'gztar', 'zip', 'tar')
 # *Sigh* Python 2.7 does not do this check itself. (Python 3 does!)
 try:
     import bz2
-except ImportError:  # pragma: nocover
+except ImportError:  # pragma: no cover
     shutil.unregister_archive_format('bztar')
 else:
     del bz2

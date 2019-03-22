@@ -22,7 +22,7 @@ import z3c.recipe.usercrontab
 requests_session = requests.Session()
 try:
     import requests_file
-except ImportError:  # pragma: nocover
+except ImportError:  # pragma: no cover
     # We are not running the tests now:
     pass
 else:
