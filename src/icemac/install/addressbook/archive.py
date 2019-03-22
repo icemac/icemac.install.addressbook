@@ -1,13 +1,19 @@
 from __future__ import print_function
+
 from . import CURRENT_NAME, DIRNAME_TEMPLATE
 import argparse
 import itertools
-import os.path
 import shutil
+import six
 
 ARCHIVE_DIR_NAME = 'archive'
 # Formats sorted by priority
 DESIRED_ARCHIVE_FORMATS = ('xztar', 'bztar', 'gztar', 'zip', 'tar')
+
+if six.PY2:
+    from pathlib2 import Path
+else:
+    from pathlib import Path  # pragma: no cover
 
 # *Sigh* Python 2.7 does not do this check itself. (Python 3 does!)
 try:
@@ -20,15 +26,16 @@ else:
 
 def prepare_archive(version):
     """Prepare archiving a directory named `icemac.addressbook-<version>`."""
-    dirname = DIRNAME_TEMPLATE.format(version)
-    if not os.path.exists(dirname):
-        raise ValueError('Directory {!r} does not exist.'.format(dirname))
-    if os.path.realpath(CURRENT_NAME).endswith(dirname):
+    dirname = Path(DIRNAME_TEMPLATE.format(version))
+    if not dirname.exists():
+        raise ValueError("Directory '{}' does not exist.".format(dirname))
+    if Path(CURRENT_NAME).resolve() == dirname.resolve():
         raise AssertionError(
-            '{!r} is the current address book -- cannot archive it!'.format(
+            "'{}' is the current address book -- cannot archive it!".format(
                 dirname))
-    if not os.path.exists(ARCHIVE_DIR_NAME):
-        os.mkdir(ARCHIVE_DIR_NAME)
+    archive_dir = Path(ARCHIVE_DIR_NAME)
+    if not archive_dir.exists():
+        archive_dir.mkdir()
     supported_archive_formats = [x[0] for x in shutil.get_archive_formats()]
     format = next(itertools.ifilter(lambda x: x in supported_archive_formats,
                                     DESIRED_ARCHIVE_FORMATS))
@@ -56,4 +63,4 @@ def main(args=None):
 
     dirname, format = prepare_archive(args.version)
     print("Archiving {} ...".format(dirname))
-    print(archive(dirname, format))
+    print(archive(str(dirname), format))

@@ -1,10 +1,15 @@
 from ..testing import user_input
 from .config import Configurator
 from io import BytesIO
-from pathlib import Path
 import configparser
 import pytest
+import six
 import sys
+
+if six.PY2:
+    from pathlib2 import Path
+else:
+    from pathlib import Path  # pragma: no cover
 
 
 # Fixtures

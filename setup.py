@@ -10,7 +10,7 @@ setup(
     install_requires=[
         'archive',
         'configparser;python_version<"3"',
-        'pathlib',
+        'pathlib2;python_version<"3"',
         'requests',
         'z3c.recipe.usercrontab',
         'zc.buildout',  # `bin/buildout` is needed to install the address book.

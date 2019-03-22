@@ -1,6 +1,12 @@
 from .archive import main, prepare_archive, archive, ARCHIVE_DIR_NAME
 from .install.install import symlink
 import pytest
+import six
+
+if six.PY2:
+    from pathlib2 import Path
+else:
+    from pathlib import Path  # pragma: no cover
 
 
 @pytest.fixture('function')
@@ -44,7 +50,8 @@ def test_archive__prepare_archive__2(address_book):
 
 def test_archive__prepare_archive__3(address_book, archive_dir):
     """It returns the file name to be archived and the format."""
-    assert ('icemac.addressbook-24.11', 'bztar') == prepare_archive('24.11')
+    assert ((Path('icemac.addressbook-24.11'), 'bztar')
+            == prepare_archive('24.11'))
 
 
 def test_archive__prepare_archive__4(address_book, archive_dir):

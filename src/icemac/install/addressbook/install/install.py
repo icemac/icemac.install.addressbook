@@ -1,8 +1,8 @@
 from __future__ import absolute_import
 
 from .. import CURRENT_NAME
-from ..utils import symlink
 from ..cmd import call_cmd
+from ..utils import symlink
 from .config import Configurator
 from .config import USER_INI
 import archive
@@ -10,14 +10,18 @@ import argparse
 import configparser
 import os
 import os.path
-import pathlib
 import pdb  # noqa
 import requests
 import shutil
+import six
 import sys
 import tempfile
 import z3c.recipe.usercrontab
 
+if six.PY2:
+    from pathlib2 import Path
+else:
+    from pathlib import Path  # pragma: no cover
 
 requests_session = requests.Session()
 try:
@@ -68,7 +72,7 @@ def extract_archive_from(url):
         download_file.seek(0)
         try:
             file = archive.Archive(download_file, r.url or url)
-            dir_name = pathlib.Path(file.namelist()[0].strip('/'))
+            dir_name = Path(file.namelist()[0].strip('/'))
             if dir_name.exists():
                 raise RuntimeError('{!r} already exists.'.format(
                     str(dir_name)))
@@ -84,7 +88,7 @@ def remove_cronjobs(path, readcrontab=None, writecrontab=None):
     The arguments `readcrontab` and `writecrontab` are only for testing
     purposes.
     """
-    path = pathlib.Path(path).resolve().absolute()
+    path = Path(path).resolve().absolute()
     for section in ['cronstart', 'cronpack', 'cronbackup']:
         identifier = '{} [{}]'.format(path, section)
         manager = z3c.recipe.usercrontab.UserCrontabManager(
@@ -121,7 +125,7 @@ def install(dir_name, stdin=None):
     if msg:
         print(msg)
         sys.exit(-1)
-    cwd = pathlib.Path.cwd()
+    cwd = Path.cwd()
     conf_args = []
     curr_path = cwd / CURRENT_NAME
     if curr_path.exists():
