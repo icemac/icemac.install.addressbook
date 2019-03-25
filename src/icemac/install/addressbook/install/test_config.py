@@ -2,6 +2,7 @@ from ..testing import user_input
 from .config import Configurator
 from io import BytesIO
 import configparser
+import icemac.install.addressbook.testing
 import pytest
 import six
 import sys
@@ -17,39 +18,7 @@ else:
 @pytest.fixture(scope='function')
 def install_default_ini(basedir):
     """Create an `install.default.ini` for `Configurator`."""
-    install_default_ini = basedir.join('install.default.ini')
-    install_default_ini.write("""\
-[install]
-eggs_dir = py-eggs
-
-[admin]
-login = me
-
-[server]
-host = my.computer.local
-port = 13090
-username =
-
-[log]
-handler = FileHandler
-max_size = 1000
-when = midnight
-interval = 1
-backups = 5
-
-[packages]
-
-[migration]
-do_migration = no
-stop_server = no
-start_server = no
-
-[links]
-imprint_text = Imprint
-imprint_url =
-dataprotection_text = Data Protection
-dataprotection_url =
-""")
+    icemac.install.addressbook.testing.create_install_default_ini(basedir)
 
 
 @pytest.fixture(scope='function')

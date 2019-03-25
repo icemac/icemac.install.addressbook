@@ -13,10 +13,15 @@ class Configurator(object):
     user_config ... pathlib.Path to config file with previously entered user
                     values which take precedence over application defaults.
                     Might be None, so no user values are used.
+    install_new_version ... If true install a new version otherwise only update
+                            the existing configuration.
+    stdin ... If not `None` use this stream instead of `sys.stdin`.
     """
 
-    def __init__(self, user_config=None, stdin=None):
+    def __init__(
+            self, user_config=None, install_new_version=True, stdin=None):
         self.user_config = user_config
+        self.install_new_version = install_new_version
         if stdin is not None:
             self.stdin = stdin
         else:
@@ -32,7 +37,10 @@ class Configurator(object):
         self.get_data_protection_link_config()
         self.print_additional_packages_intro()
         self.get_additional_packages()
-        self.get_migration_options()
+        if self.install_new_version:
+            self.get_migration_options()
+        else:
+            self.get_restart_options()
         self.create_admin_zcml()
         self.create_buildout_cfg()
         self.store()
@@ -104,14 +112,18 @@ class Configurator(object):
         # create config
         self._conf = configparser.ConfigParser()
         self._conf.read(to_read)
-        if self.user_config is not None:
-            self._conf.set(
-                'migration', 'old_instance', str(self.user_config.parent))
-        else:
-            self._conf.set('migration', 'old_instance', '')
+        if self.install_new_version:
+            if self.user_config is not None:
+                self._conf.set(
+                    'migration', 'old_instance', str(self.user_config.parent))
+            else:
+                self._conf.set('migration', 'old_instance', '')
 
     def print_intro(self):
-        print('Welcome to icemac.addressbook installation')
+        if self.install_new_version:
+            print('Welcome to icemac.addressbook installation')
+        else:
+            print('Welcome to changing your icemac.addressbook installation')
         print()
         print('Hint: to use the default value (the one in [brackets]), '
               'enter no value.')
@@ -221,6 +233,15 @@ class Configurator(object):
         self.start_server = self.ask_user(
             'New instance should be started as a demon process after '
             'migration', 'migration', 'start_server', values=yes_no)
+
+    def get_restart_options(self):
+        print('The address book instance has to be restarted.')
+        print('When it runs as demon process it can be restarted'
+              ' automatically otherwise you have to restart it manually.')
+        self.restart_server = self.ask_user(
+            'Should the instance be automatically restarted?',
+            'migration', '', values=('yes', 'no'), store_in_config=False,
+            global_default='yes')
 
     def create_admin_zcml(self):
         if not self.admin_passwd:

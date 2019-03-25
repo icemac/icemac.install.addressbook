@@ -27,6 +27,7 @@ setup(
         'console_scripts': [
             'install-addressbook = icemac.install.addressbook.install.install:main',  # noqa: E501
             'make-current-addressbook = icemac.install.addressbook.install.make_current:main',  # noqa: E501
+            'change-addressbook-config = icemac.install.addressbook.install.update:main',  # noqa: E501
             'archive-addressbook = icemac.install.addressbook.archive:main',
         ],
     },

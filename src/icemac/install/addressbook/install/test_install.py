@@ -8,6 +8,8 @@ from .install import main
 from .install import migrate
 from .install import not_matched_prerequisites
 from .install import remove_cronjobs
+from icemac.install.addressbook.testing import create_script
+from icemac.install.addressbook.testing import user_ini
 import icemac.install.addressbook.testing
 import io
 import mock
@@ -79,21 +81,6 @@ def old_instance_dir(basedir):
         'var', 'blobstoragesnapshots').ensure_dir()
     blobstoragesnapshots_dir.join('blob_snap.bak').write('2')
     yield old_inst_dir
-
-
-def user_ini(basedir, section, **kw):
-    """Fill the user_ini with the given section and values."""
-    user_ini = basedir.join(USER_INI)
-    user_ini.write('[{}]\n'.format(section))
-    for key, value in kw.items():
-        user_ini.write('{} = {}\n'.format(key, value), mode='a')
-
-
-def create_script(dir, name):
-    """Create a script in `dir` which prints its args."""
-    f = dir.join(name)
-    f.write('#!/bin/bash\necho $0 $*')
-    f.chmod(0o700)
 
 
 def test_install__main__1(local_pypi):

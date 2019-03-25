@@ -227,7 +227,7 @@ def migrate():
 def main(args=None):
     """Entry point for `bin/install-addressbook`."""
     parser = argparse.ArgumentParser(
-        description='Update the address book to a new version.')
+        description='Install a new version of the address book.')
     parser.add_argument(
         'version',
         nargs=argparse.OPTIONAL,

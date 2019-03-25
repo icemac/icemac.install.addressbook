@@ -11,6 +11,9 @@ Change log
 - Move whole installation code here from `icemac.addressbook` supporting its
   versions >= 9.
 
+- Add script `bin/change-addressbook-config` to change configuration without
+  installing a new addressbook version.
+
 
 1.3.1 (2018-08-04)
 ==================
