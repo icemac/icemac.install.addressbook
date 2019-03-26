@@ -112,7 +112,7 @@ def test_update__update__2(basedir):
         update(stdin)
 
 
-def test_update__update__3(capsys):
+def test_update__update__3(basedir, capsys):
     """It prints error text and exits if `current` doesn't exist in cwd."""
     with pytest.raises(SystemExit) as err:
         update()
