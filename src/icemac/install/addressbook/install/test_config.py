@@ -117,7 +117,7 @@ def test_config__Configurator__ask_user__5(config, capsys):
 
 
 def test_config__Configurator__load__1(config):
-    """It (Re-) loads the configuration from the configuration file(s)."""
+    """It (re-) loads the configuration from the configuration file(s)."""
     with user_input('4711', config.stdin):
         config.ask_user('Server port', 'server', 'port')
     assert '4711' == config.get('server', 'port')
