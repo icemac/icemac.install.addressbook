@@ -14,7 +14,8 @@ Change log
 - Add script `bin/change-addressbook-config` to change configuration without
   installing a new addressbook version.
 
-- Hash the admin password in the created `admin.zcml`.
+- Hash the admin password in the created `admin.zcml` and force to change the
+  plain text password during install resp. config update.
 
 
 1.3.1 (2018-08-04)

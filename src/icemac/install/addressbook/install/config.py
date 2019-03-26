@@ -20,6 +20,7 @@ class Configurator(object):
     """
 
     salt = None  # means: use random salt
+    force_new_password = False
 
     def __init__(
             self, user_config=None, install_new_version=True, stdin=None):
@@ -121,7 +122,9 @@ class Configurator(object):
                     'migration', 'old_instance', str(self.user_config.parent))
             else:
                 self._conf.set('migration', 'old_instance', '')
-        self._conf.remove_option('admin', 'password')
+        # If there is an existing password force to set a new one which will
+        # be encrypted:
+        self.force_new_password = self._conf.remove_option('admin', 'password')
 
     def print_intro(self):
         if self.install_new_version:
@@ -140,7 +143,7 @@ class Configurator(object):
     def get_server_options(self):
         self.admin_login = self.ask_user(
             'Log-in name for the administrator', 'admin', 'login')
-        if self.first_time_installation:
+        if self.first_time_installation or self.force_new_password:
             self.admin_passwd = self.ask_user(
                 'Password for the administrator', 'admin', 'password',
                 global_default='', store_in_config=False, required=True)

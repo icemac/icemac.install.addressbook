@@ -159,18 +159,28 @@ def test_config__Configurator__load__4(config, basedir):
     assert '' == config.get('migration', 'old_instance')
 
 
-def test_config__Configurator__load__5(basedir):
-    """It removes a possibly existing password."""
+def test_config__Configurator__load__5(basedir, capsys):
+    """It removes a possibly existing password and enforces a new one."""
     install_default_ini = basedir.join('install.default.ini')
     install_default_ini.write(textwrap.dedent("""
         [admin]
+        login = admin
         password = secret
+        [server]
+        host = localhost
+        port = 8080
+        username =
         [migration]
         """))
     config = Configurator(stdin=BytesIO())
     config.load()
     with pytest.raises(configparser.NoOptionError):
         config.get('admin', 'password')
+    with user_input(['', 'new-pass'], config.stdin):
+        config.get_server_options()
+    out, err = capsys.readouterr()
+    # Enforcing new password means not having the option to leave blank:
+    assert u' Password for the administrator: [] ' in out.splitlines()
 
 
 def test_config__Configurator__print_intro__1(config, capsys):
