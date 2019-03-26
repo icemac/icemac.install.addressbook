@@ -39,7 +39,7 @@ def update(stdin=None):
             call_cmd('Restarting instance', 'bin/svctl', 'restart', 'all')
     finally:
         os.chdir(str(cwd))  # PY2: in PY3 `str` is no longer needed
-    print('Installation complete.')
+    print('Done.')
 
 
 def main(args=None):

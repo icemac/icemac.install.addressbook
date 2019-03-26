@@ -80,7 +80,7 @@ def test_update__update__1(
         u'../bin/buildout',
         u'Restarting instance ...',
         u'bin/svctl restart all',
-        u'Installation complete.'] == out.splitlines()[-11:]
+        u'Done.'] == out.splitlines()[-11:]
     assert [
         '[buildout]\n',
         'extends = profiles/prod.cfg\n',
