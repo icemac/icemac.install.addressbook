@@ -410,6 +410,7 @@ def test_config__Configurator__create_admin_zcml__1(config, capsys, basedir):
     """
     config.admin_login = 'root'
     config.admin_passwd = 'keins'
+    config.salt = 'sugar'
     config.create_admin_zcml()
     assert 'creating admin.zcml ...\n' == capsys.readouterr()[0]
     assert [
@@ -418,8 +419,8 @@ def test_config__Configurator__create_admin_zcml__1(config, capsys, basedir):
         '    id="icemac.addressbook.global.Administrator"',
         '    title="global administrator"',
         '    login="root"',
-        '    password_manager="Plain Text"',
-        '    password="keins" />',
+        '    password_manager="SSHA"',
+        '    password="{SSHA}yq8p/Knrz5OvCQuaimo+4zynbGJzdWdhcg==" />',
         '  <grant',
         '    role="icemac.addressbook.global.Administrator"',
         '    principal="icemac.addressbook.global.Administrator" />',
@@ -596,6 +597,7 @@ def test_config__Configurator____call____1(config, capsys, basedir):
     To ease testing changes we mostly use only default values.
     """
     with user_input(['', '', 'passwd'], config.stdin):
+        config.salt = 'pepper'
         config()
     assert [
         u'Welcome to icemac.addressbook installation',
@@ -696,8 +698,8 @@ def test_config__Configurator____call____1(config, capsys, basedir):
         '    id="icemac.addressbook.global.Administrator"',
         '    title="global administrator"',
         '    login="me"',
-        '    password_manager="Plain Text"',
-        '    password="passwd" />',
+        '    password_manager="SSHA"',
+        '    password="{SSHA}VPgLklsqO8dtMYsNNQIEVLwS/EdwZXBwZXI=" />',
         '  <grant',
         '    role="icemac.addressbook.global.Administrator"',
         '    principal="icemac.addressbook.global.Administrator" />',

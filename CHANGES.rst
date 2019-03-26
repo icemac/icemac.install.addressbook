@@ -14,6 +14,8 @@ Change log
 - Add script `bin/change-addressbook-config` to change configuration without
   installing a new addressbook version.
 
+- Hash the admin password in the created `admin.zcml`.
+
 
 1.3.1 (2018-08-04)
 ==================

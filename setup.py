@@ -14,6 +14,7 @@ setup(
         'requests',
         'z3c.recipe.usercrontab',
         'zc.buildout',  # `bin/buildout` is needed to install the address book.
+        'zope.password',
     ],
 
     extras_require={

@@ -1,6 +1,7 @@
 from __future__ import absolute_import, print_function
 import configparser
 import sys
+import zope.password.password
 
 
 INDEX_URL = "https://pypi.python.org/simple"
@@ -17,6 +18,8 @@ class Configurator(object):
                             the existing configuration.
     stdin ... If not `None` use this stream instead of `sys.stdin`.
     """
+
+    salt = None  # means: use random salt
 
     def __init__(
             self, user_config=None, install_new_version=True, stdin=None):
@@ -246,6 +249,8 @@ class Configurator(object):
     def create_admin_zcml(self):
         if not self.admin_passwd:
             return
+        manager = zope.password.password.SSHAPasswordManager()
+        password = manager.encodePassword(self.admin_passwd, salt=self.salt)
         print('creating admin.zcml ...')
         with open('admin.zcml', 'w') as admin_zcml:
             admin_zcml.write('\n'.join(
@@ -254,8 +259,8 @@ class Configurator(object):
                  '    id="icemac.addressbook.global.Administrator"',
                  '    title="global administrator"',
                  '    login="%s"' % self.admin_login,
-                 '    password_manager="Plain Text"',
-                 '    password="%s" />' % self.admin_passwd,
+                 '    password_manager="SSHA"',
+                 '    password="%s" />' % password,
                  '  <grant',
                  '    role="icemac.addressbook.global.Administrator"',
                  '    principal="icemac.addressbook.global.Administrator" />',
