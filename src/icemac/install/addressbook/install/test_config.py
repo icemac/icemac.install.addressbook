@@ -6,6 +6,7 @@ import icemac.install.addressbook.testing
 import pytest
 import six
 import sys
+import textwrap
 
 if six.PY2:
     from pathlib2 import Path
@@ -156,6 +157,20 @@ def test_config__Configurator__load__4(config, basedir):
     config.user_config = None
     config.load()
     assert '' == config.get('migration', 'old_instance')
+
+
+def test_config__Configurator__load__5(basedir):
+    """It removes a possibly existing password."""
+    install_default_ini = basedir.join('install.default.ini')
+    install_default_ini.write(textwrap.dedent("""
+        [admin]
+        password = secret
+        [migration]
+        """))
+    config = Configurator(stdin=BytesIO())
+    config.load()
+    with pytest.raises(configparser.NoOptionError):
+        config.get('admin', 'password')
 
 
 def test_config__Configurator__print_intro__1(config, capsys):

@@ -121,6 +121,7 @@ class Configurator(object):
                     'migration', 'old_instance', str(self.user_config.parent))
             else:
                 self._conf.set('migration', 'old_instance', '')
+        self._conf.remove_option('admin', 'password')
 
     def print_intro(self):
         if self.install_new_version:
