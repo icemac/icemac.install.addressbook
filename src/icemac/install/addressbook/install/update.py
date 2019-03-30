@@ -2,16 +2,11 @@ from .. import CURRENT_NAME
 from ..cmd import call_cmd
 from .config import Configurator
 from .config import USER_INI
+from icemac.install.addressbook._compat import Path
 import argparse
 import os
 import pdb  # noqa: T002
-import six
 import sys
-
-if six.PY2:
-    from pathlib2 import Path
-else:
-    from pathlib import Path  # pragma: no cover
 
 
 def update(stdin=None):

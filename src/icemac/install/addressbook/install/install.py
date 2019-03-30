@@ -5,6 +5,7 @@ from ..cmd import call_cmd
 from ..utils import symlink
 from .config import Configurator
 from .config import USER_INI
+from icemac.install.addressbook._compat import Path
 import archive
 import argparse
 import configparser
@@ -13,15 +14,10 @@ import os.path
 import pdb  # noqa
 import requests
 import shutil
-import six
 import sys
 import tempfile
 import z3c.recipe.usercrontab
 
-if six.PY2:
-    from pathlib2 import Path
-else:
-    from pathlib import Path  # pragma: no cover
 
 requests_session = requests.Session()
 try:

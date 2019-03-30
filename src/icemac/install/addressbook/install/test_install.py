@@ -8,6 +8,7 @@ from .install import main
 from .install import migrate
 from .install import not_matched_prerequisites
 from .install import remove_cronjobs
+from icemac.install.addressbook._compat import Path
 from icemac.install.addressbook.testing import create_script
 from icemac.install.addressbook.testing import user_ini
 import icemac.install.addressbook.testing
@@ -16,13 +17,7 @@ import mock
 import os.path
 import pkg_resources
 import pytest
-import six
 import textwrap
-
-if six.PY2:
-    from pathlib2 import Path
-else:
-    from pathlib import Path  # pragma: no cover
 
 
 example_zip_url = Path(pkg_resources.resource_filename(

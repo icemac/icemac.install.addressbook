@@ -1,12 +1,7 @@
 from .archive import main, prepare_archive, archive, ARCHIVE_DIR_NAME
 from .install.install import symlink
+from icemac.install.addressbook._compat import Path
 import pytest
-import six
-
-if six.PY2:
-    from pathlib2 import Path
-else:
-    from pathlib import Path  # pragma: no cover
 
 
 @pytest.fixture('function')

@@ -1,19 +1,14 @@
 from __future__ import print_function
 
 from . import CURRENT_NAME, DIRNAME_TEMPLATE
+from icemac.install.addressbook._compat import Path
 import argparse
 import itertools
 import shutil
-import six
 
 ARCHIVE_DIR_NAME = 'archive'
 # Formats sorted by priority
 DESIRED_ARCHIVE_FORMATS = ('xztar', 'bztar', 'gztar', 'zip', 'tar')
-
-if six.PY2:
-    from pathlib2 import Path
-else:
-    from pathlib import Path  # pragma: no cover
 
 # *Sigh* Python 2.7 does not do this check itself. (Python 3 does!)
 try:

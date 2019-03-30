@@ -1,17 +1,12 @@
 from ..testing import user_input
 from .config import Configurator
+from icemac.install.addressbook._compat import Path
 from io import BytesIO
 import configparser
 import icemac.install.addressbook.testing
 import pytest
-import six
 import sys
 import textwrap
-
-if six.PY2:
-    from pathlib2 import Path
-else:
-    from pathlib import Path  # pragma: no cover
 
 
 # Fixtures
