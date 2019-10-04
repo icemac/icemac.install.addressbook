@@ -2,7 +2,7 @@
 Change log
 ==========
 
-1.5.1 (unreleased)
+1.5.1 (2019-10-04)
 ==================
 
 - Add install dependency for `zc.lockfile` because it cannot be loaded in the
