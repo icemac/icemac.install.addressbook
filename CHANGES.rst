@@ -2,10 +2,11 @@
 Change log
 ==========
 
-1.5 (unreleased)
-================
+1.5.1 (unreleased)
+==================
 
-- Nothing changed yet.
+- Add install dependency for `zc.lockfile` because it cannot be loaded in the
+  buildout environment when `zc.buildout` is installed via `pip`.
 
 
 1.4 (2019-09-26)

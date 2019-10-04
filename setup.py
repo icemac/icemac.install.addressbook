@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='icemac.install.addressbook',
-    version='1.5.dev0',
+    version='1.5.1.dev0',
 
     install_requires=[
         'archive',
@@ -14,6 +14,8 @@ setup(
         'requests',
         'z3c.recipe.usercrontab',
         'zc.buildout',  # `bin/buildout` is needed to install the address book.
+        'zc.lockfile',  # this is needed here because it cannot be loaded from
+                        # a buildout if zc.buildout is installed via pip.
         'zope.password',
     ],
 
