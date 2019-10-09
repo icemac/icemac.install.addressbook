@@ -5,7 +5,11 @@ Change log
 1.5.2 (unreleased)
 ==================
 
-- Nothing changed yet.
+- When already using an address book version with an encrypted admin password
+  and then omitting the password when updating to the next version the
+  `admin.zcml` file from the previous installation is copied. (This was not
+  the case before leading to a broken installation because of a missing
+  `admin.zcml`.)
 
 
 1.5.1 (2019-10-04)

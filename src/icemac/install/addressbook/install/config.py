@@ -1,5 +1,6 @@
 from __future__ import absolute_import, print_function
 import configparser
+import shutil
 import sys
 import zope.password.password
 
@@ -251,28 +252,10 @@ class Configurator(object):
             global_default='yes')
 
     def create_admin_zcml(self):
-        if not self.admin_passwd:
-            return
-        manager = zope.password.password.SSHAPasswordManager()
-        password = manager.encodePassword(self.admin_passwd, salt=self.salt)
-        print('creating admin.zcml ...')
-        with open('admin.zcml', 'w') as admin_zcml:
-            admin_zcml.write('\n'.join(
-                ('<configure xmlns="http://namespaces.zope.org/zope">',
-                 '  <principal',
-                 '    id="icemac.addressbook.global.Administrator"',
-                 '    title="global administrator"',
-                 '    login="%s"' % self.admin_login,
-                 '    password_manager="SSHA"',
-                 '    password="%s" />' % password,
-                 '  <grant',
-                 '    role="icemac.addressbook.global.Administrator"',
-                 '    principal="icemac.addressbook.global.Administrator" />',
-                 '  <grant',
-                 '    permission="zope.ManageContent"',
-                 '    principal="icemac.addressbook.global.Administrator" />',
-                 '</configure>',
-                 )))
+        if self.admin_passwd:
+            self._write_new_admin_zcml()
+        elif self.install_new_version:
+            self._copy_old_admin_zcml()
 
     def create_buildout_cfg(self):
         print('creating buildout.cfg ...')
@@ -348,3 +331,29 @@ class Configurator(object):
     def _log_args_TimedRotatingFileHandler(self):
         log_when = "'%s'" % self.log_when
         return ', '.join((log_when, self.log_interval, self.log_backups))
+
+    def _write_new_admin_zcml(self):
+        manager = zope.password.password.SSHAPasswordManager()
+        password = manager.encodePassword(self.admin_passwd, salt=self.salt)
+        print('creating admin.zcml ...')
+        with open('admin.zcml', 'w') as admin_zcml:
+            admin_zcml.write('\n'.join(
+                ('<configure xmlns="http://namespaces.zope.org/zope">',
+                 '  <principal',
+                 '    id="icemac.addressbook.global.Administrator"',
+                 '    title="global administrator"',
+                 '    login="%s"' % self.admin_login,
+                 '    password_manager="SSHA"',
+                 '    password="%s" />' % password,
+                 '  <grant',
+                 '    role="icemac.addressbook.global.Administrator"',
+                 '    principal="icemac.addressbook.global.Administrator" />',
+                 '  <grant',
+                 '    permission="zope.ManageContent"',
+                 '    principal="icemac.addressbook.global.Administrator" />',
+                 '</configure>',
+                 )))
+
+    def _copy_old_admin_zcml(self):
+        print('copying admin.zcml ...')
+        shutil.copy2(str(self.user_config.parent / 'admin.zcml'), '.')

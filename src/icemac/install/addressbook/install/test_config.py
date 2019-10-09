@@ -452,12 +452,36 @@ def test_config__Configurator__create_admin_zcml__1(config, capsys, basedir):
 
 
 def test_config__Configurator__create_admin_zcml__2(config, capsys, basedir):
-    """It doesn't create `admin.zcml` file, if `admin_passwd` is not set."""
+    """It doesn't create `admin.zcml`, if `admin_passwd` is not set and ...
+
+    ... we are updating the current installation. This means we are keeping the
+    existing one.
+    """
     config.admin_login = 'root'
     config.admin_passwd = ''
+    config.install_new_version = False
     config.create_admin_zcml()
     assert '' == capsys.readouterr()[0]
     assert not basedir.join('admin.zcml').exists()
+
+
+def test_config__Configurator__create_admin_zcml__3(config, capsys, basedir):
+    """It copies the previous `admin.zcml`, if `admin_passwd` is not set ...
+
+    ... and we are updating to a new address book version.
+    """
+    user_ini = basedir.mkdir('prev_version').join('install.user.ini')
+    user_ini.write('')
+    admin_zcml = basedir.join('prev_version', 'admin.zcml')
+    admin_zcml.write('<prev admin.zcml>')
+    config.user_config = Path(str(user_ini))
+    config.admin_login = 'root'
+    config.admin_passwd = ''
+
+    config.create_admin_zcml()
+
+    assert 'copying admin.zcml ...\n' == capsys.readouterr()[0]
+    assert '<prev admin.zcml>' == basedir.join('admin.zcml').read()
 
 
 def test_config__Configurator__create_buildout_cfg__1(
