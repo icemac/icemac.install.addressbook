@@ -2,7 +2,7 @@
 Change log
 ==========
 
-1.5.2 (unreleased)
+1.5.2 (2019-10-09)
 ==================
 
 - When already using an address book version with an encrypted admin password
