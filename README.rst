@@ -95,6 +95,25 @@ The script executes the following steps:
    not yet exists.)
 2. Delete the requested `icemac.addressbook` installation.
 
+
+change-addressbook-config
+-------------------------
+
+If you want change some answers to the questions asked during the installation,
+you can run this script.
+
+Start the script using::
+
+    $ bin/change-addressbook-config
+
+The script executes the following steps:
+
+1. The configuration questions get re-presented to you with your previously
+   entered values as defaults.
+
+2. The address book instance has to be restarted afterwards. This can be done
+   automatically by the script or manually.
+
 Hacking
 =======
 
