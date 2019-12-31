@@ -12,7 +12,7 @@ Scripts to ease the installation and update an existing installation of
 Copyright
 =========
 
-Copyright (c) 2016-2019 Michael Howitz
+Copyright (c) 2016-2020 Michael Howitz
 
 This package is licensed under the MIT License, see LICENSE.txt inside the
 package.
