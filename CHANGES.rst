@@ -5,7 +5,7 @@ Change log
 1.5.3 (unreleased)
 ==================
 
-- Nothing changed yet.
+- Pin dependencies to older versions to keep supporting Python 2.
 
 
 1.5.2 (2019-10-09)

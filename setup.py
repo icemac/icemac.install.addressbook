@@ -17,6 +17,7 @@ setup(
         'zc.lockfile',  # this is needed here because it cannot be loaded from
                         # a buildout if zc.buildout is installed via pip.
         'zope.password',
+        'zipp < 2',  # keep supporting PY2
     ],
 
     extras_require={
