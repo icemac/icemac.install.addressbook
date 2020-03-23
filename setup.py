@@ -22,7 +22,7 @@ setup(
 
     extras_require={
         'test': [
-            'mock',
+            'mock < 4',  # keep supporting PY2
             'requests-file',
         ],
     },
