@@ -2,7 +2,7 @@
 Change log
 ==========
 
-1.5.3 (unreleased)
+1.5.3 (2020-03-23)
 ==================
 
 - Pin dependencies to older versions to keep supporting Python 2.
