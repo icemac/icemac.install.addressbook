@@ -43,7 +43,7 @@ def archive(dirname, format):
     shutil.move(archive, ARCHIVE_DIR_NAME)
     shutil.rmtree(dirname)
     return "Done archiving to {dir}/{target}.".format(
-        dirname=dirname, dir=ARCHIVE_DIR_NAME, target=archive)
+        dir=ARCHIVE_DIR_NAME, target=archive)
 
 
 def main(args=None):
